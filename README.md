@@ -1,1 +1,1 @@
-# Angular18-Smartbillpos julio 2024
+# Angular18-Smartbillpos
