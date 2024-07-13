@@ -1,0 +1,98 @@
+
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <!-- ------------------------------------------------------------ -->
+      <!-- Suscripción a eventos en los componentes hijo -->
+      <app-header [placeholder]="'Buscar Producto...'" (search)="applyFilter($event)"></app-header>
+
+      <!-- Encabezado principal con borde resaltado -->
+      <div style="display: flex; justify-content: space-between; align-items: center; border: 2px solid #ffffff; background-color: #f3f3f3; padding: 10px;">
+        <app-logo></app-logo>
+        <h6 class="titulo" style="flex: 70%; font-size: 17px; font-weight: bold;">GESTION PRODUCTO</h6>
+        <div style="flex: 30%; display: flex; justify-content: flex-end; align-items: center;">
+          <button class="btn btn-light btn--icon-text" routerLink="/home"><i class="zmdi zmdi-home"></i> Home</button>
+
+          <!-- Suscripción a eventos en los componentes hijo -->
+          <app-producto-menu 
+            (addProduct)="Modal_addEditProducto()"
+            (exportExcel)="exportAsExcel()"
+            (exportPdf)="exportAsPdf()">
+          </app-producto-menu>
+        </div>
+      </div>
+
+      <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8" multiTemplateDataRows>
+        <!-- Definición de columnas -->
+
+        <ng-container matColumnDef="foto">
+          <th class="blue-header centered-header padded-header" *matHeaderCellDef mat-sort-header> PRODUCTO </th>
+          <td mat-cell *matCellDef="let element">
+            <!-- Aquí se muestra la foto redonda pequeña -->
+            <div class="tiny-round-photo">
+              <img [src]="element.foto" alt="Foto" class="rounded-photo">
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nombre">
+          <th class="blue-header centered-header padded-header" *matHeaderCellDef mat-sort-header> NOMBRE </th>
+          <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="inventario">
+          <th *matHeaderCellDef class="blue-header centered-header padded-header"> EXISTENCIA </th>
+          <td mat-cell *matCellDef="let element"> {{element.inventario}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <th *matHeaderCellDef class="blue-header centered-header padded-header">ACCIONES</th>
+          <td mat-cell *matCellDef="let element">
+            <i (click)="eliminarProducto(element)" class="far fa-trash-alt icon-large icon-delete" matTooltip="Eliminar {{element.nombre}}"></i>
+            <span style="margin-left: 8px;"></span>
+            <i (click)="Modal_addEditProducto(element)" class="fas fa-cog icon-large icon-edit" matTooltip="Editar {{element.nombre}}"></i>
+          </td>
+        </ng-container>
+
+        <!-- Filas de datos -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="element-row"
+            [class.expanded-row]="expandedElement === row"
+            (click)="toggleRow(row)">
+        </tr>
+
+        <!-- Detalle expandido -->
+        <ng-container matColumnDef="expandedDetail">
+          <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+          <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+            <div class="element-detail" [@detailExpand]="expandedElement === element ? 'expanded' : 'collapsed'">
+              <div class="detail-column">
+                <!-- Componente hijo para mostrar detalles -->
+                <app-producto-det [element]="element"></app-producto-det>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+      </table>
+
+      <!-- Paginación -->
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+      <!-- ------------------------------------------------------------ -->
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card">
+       <!-- ------------------------------------------------------------ -->
+      <div style="display: flex; justify-content: space-between; align-items: center; border: 2px solid #ffffff; background-color: #e2dcdc; padding: 10px;">
+        <h6 class="titulo" style="flex: 100%; font-size: 17px; font-weight: bold;">REPORTE INVENTARIO PRODUCTOS</h6>
+      </div>
+      
+      <app-producto-report ></app-producto-report>
+      <!-- ------------------------------------------------------------ -->
+  </div>      
+  
+
+
+</div>

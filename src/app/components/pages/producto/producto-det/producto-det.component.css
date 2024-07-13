@@ -1,0 +1,134 @@
+
+.custom-tab-group .mat-tab-label {
+  background-color: #ADD8E6; /* Fondo azul claro */
+}
+
+.custom-tab-group .mat-tab-label:hover {
+  background-color: #B0E0E6; /* Fondo azul claro un poco más oscuro al pasar el ratón */
+}
+
+.custom-tab-group .mat-tab-label.mat-tab-label-active {
+  background-color: #87CEEB; /* Fondo azul claro más oscuro para la pestaña activa */
+}
+
+
+
+p.detalle-fila {
+  background-color: #c6cfd8; /* Color de fondo suave */
+  padding: 10px;
+  margin-bottom: 2px;
+  border-radius: 5px;
+}
+
+
+
+
+
+
+/* Contenedor detalle-side para detalle-foto y detalle-barra */
+.detalle-side {
+  display: flex;
+  gap: 20px; /* Espacio entre los elementos */
+  border: 1px solid #ddd; /* Línea para ver el contenedor */
+  width:  100%;
+  height: 40%;
+  margin: 0 auto; /* Centra el contenedor horizontalmente */
+  align-items: center; /* Centra verticalmente el contenido */
+  justify-content: center; /* Centra horizontalmente el contenido */
+}
+
+/* Estilo común para detalle-foto y detalle-barra */
+.detalle-foto, .detalle-barra {
+  flex: 1; /* Ocupa el mismo espacio dentro del contenedor */
+  display: flex;
+  align-items: center; /* Centra verticalmente el contenido */
+  justify-content: center; /* Centra horizontalmente el contenido */
+  background-color: #ece4e4; /* Fondo claro para distinguir áreas */
+  padding: 10px; /* Relleno interno */
+  box-sizing: border-box; /* Incluye el padding en el tamaño total */
+  overflow: hidden; /* Evita que el contenido afecte el tamaño del contenedor */
+  height: 100%;
+
+}
+
+/* Asegura que las imágenes no excedan el tamaño del contenedor */
+.detalle-foto img {
+  max-width: 100%; /* Ajusta la imagen al tamaño máximo del contenedor */
+  height: 50px; /* Permite que la altura se ajuste automáticamente */
+  display: block; /* Evita espacio adicional debajo de la imagen */
+  margin: 0 auto; /* Centra la imagen horizontalmente */
+  object-fit: contain; /* Escala la imagen para que quepa sin recortar */
+}
+
+
+
+
+
+
+
+
+/* 
+
+.detalle-side {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px; 
+}
+
+.detalle-info {
+  border: 1px solid #ccc;
+  padding: 10px;
+  flex: 1; 
+}
+
+.detalle-foto, .detalle-barra {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  flex: 0 0 auto; 
+}
+
+.detalle-foto {
+  flex-basis: 30%; 
+}
+
+.detalle-barra {
+  flex-basis: 70%; 
+  display: flex;
+  flex-direction: column;
+}
+
+.detalle-barra .codigo-barra {
+  flex: 1; 
+}
+
+.detalle-foto img {
+  max-width: 100%;
+  max-height: 120px;
+  margin-bottom: 10px; 
+}
+  */
+
+
+
+
+
+/* proveedor-det.component.css 
+.custom-tab-group .mat-tab-label {
+  background-color: #ADD8E6; 
+}
+
+.custom-tab-group .mat-tab-label:hover {
+  background-color: #B0E0E6; 
+}
+
+.custom-tab-group .mat-tab-label.mat-tab-label-active {
+  background-color: #87CEEB; 
+}
+
+p.detalle-fila {
+  background-color: #c6cfd8; 
+  padding: 10px;
+  margin-bottom: 2px;
+  border-radius: 5px;
+}*/

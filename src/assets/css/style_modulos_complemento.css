@@ -1,0 +1,10 @@
+/* Detalles y secciones */
+.detail-section {
+    padding: 16px;
+  }
+  
+  .detail-row {
+    height: 0;
+    overflow: hidden;
+  }
+  

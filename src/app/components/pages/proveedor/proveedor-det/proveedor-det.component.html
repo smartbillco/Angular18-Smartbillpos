@@ -1,0 +1,34 @@
+<!--
+<mat-tab-group  class="custom-tab-group" animationDuration="2000ms">
+  <mat-tab label="Detalle del Proveedor">
+      
+    <p class="detalle-fila"><strong>Tipo:</strong> {{element.tipoIdentificacion}}</p>
+    <p class="detalle-fila"><strong>Identificacion:</strong> {{element.identificacion}}</p>
+    <p class="detalle-fila"><strong>Correo:</strong> {{element.correo}}</p>
+    <p class="detalle-fila"><strong>Direccion:</strong> {{element.direccion}}</p>  
+    <p class="detalle-fila"><strong>Telefono:</strong> {{element.telefono}}</p>
+    <p class="detalle-fila"><strong>Contacto:</strong> {{element.contacto}}</p>
+    <p class="detalle-fila"><strong>Regimen:</strong> {{element.regimen}}</p>
+    
+  </mat-tab>
+  <mat-tab label="Catalogo de productos">Los productos seran reflejados por un JSON</mat-tab>
+    
+</mat-tab-group>-->
+<mat-tab-group  class="custom-tab-group" animationDuration="2000ms">
+  <div class="tab-content">
+    <mat-tab label="Detalle del producto">
+      <p class="detalle-fila"><strong>Tipo:</strong> {{element.tipoIdentificacion}}</p>
+      <p class="detalle-fila"><strong>Identificacion:</strong> {{element.identificacion}}</p>
+      <p class="detalle-fila"><strong>Correo:</strong> {{element.correo}}</p>
+      <p class="detalle-fila"><strong>Direccion:</strong> {{element.direccion}}</p>  
+      <p class="detalle-fila"><strong>Telefono:</strong> {{element.telefono}}</p>
+      <p class="detalle-fila"><strong>Contacto:</strong> {{element.contacto}}</p>
+      <p class="detalle-fila"><strong>Regimen:</strong> {{element.regimen}}</p>
+    </mat-tab>
+
+    <mat-tab label="Inventario">
+
+    </mat-tab>
+
+  </div>
+</mat-tab-group>

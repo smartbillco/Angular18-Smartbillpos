@@ -1,0 +1,25 @@
+
+
+<mat-tab-group  class="custom-tab-group" animationDuration="2000ms">
+
+  <mat-tab label="Detalle del cliente">
+    <p class="detalle-fila"><strong>ID: </strong> {{element.id}}</p>
+    <p class="detalle-fila"><strong>Tipo: </strong> {{element.tipoIdentificacion}}</p>
+    <p class="detalle-fila"><strong>Identificación: </strong> {{element.identificacion}}</p>
+    <p class="detalle-fila"><strong>Cliente:</strong> {{element.nombre}}</p>
+    <p class="detalle-fila"><strong>Celular:</strong> {{element.celular}}</p>
+    <p class="detalle-fila"><strong>Dirección:</strong> {{element.direccion}}</p>
+    <p class="detalle-fila"><strong>Correo:</strong> {{element.correo}}</p>
+    <p class="detalle-fila"><strong>Fecha nacimiento:</strong> {{element.fechaNacimiento}}</p>
+  </mat-tab>
+
+  <mat-tab label="Contabilidad">
+    <app-cliente-mov></app-cliente-mov>
+  </mat-tab>
+    
+  <!--<mat-tab label="Informes y Análisis">
+
+    <app-proveedor-list class=""></app-proveedor-list>
+
+  </mat-tab>-->
+</mat-tab-group>

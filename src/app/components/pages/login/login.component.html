@@ -1,0 +1,50 @@
+<div class="login-container">
+    <mat-card class="login-card">
+        <mat-card-header>
+    <div class="header-title">
+      <h1 class="app-name">SmartBill</h1>
+    </div>
+          </mat-card-header>
+      <mat-card-content>
+
+      <form role="form" #formLogin="ngForm" (ngSubmit)="login()">
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo Electrónico</mat-label>
+          <input matInput [(ngModel)]="usuario.email" type="email" name="email" id="email"
+            minlength="8" maxlength="45" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Contraseña</mat-label>
+          <input matInput [(ngModel)]="usuario.password" type="password" name="password" id="password"
+            minlength="6" maxlength="20" required>
+        </mat-form-field>
+
+
+        <div class="social-login">
+
+
+          <button type="submit" mat-raised-button  class="social-button google-button">
+            <mat-icon class="material-icons">alternate_email</mat-icon>
+            <span>Iniciar sesión</span>
+          </button>
+<!--
+          <button type="submit" class="btn btn--icon login__block__btn"><i
+            class="zmdi zmdi-long-arrow-right"></i></button>-->
+
+
+          <button mat-raised-button color="primary" class="social-button facebook-button">
+            <mat-icon class="material-icons">facebook</mat-icon>
+            <span>Iniciar sesión con Facebook</span>
+          </button>
+
+        </div>
+        <div class="signup-link">
+          <a href="#">¿No tienes una cuenta? Regístrate</a>
+        </div> 
+      
+      </form>
+      </mat-card-content>
+    </mat-card>
+  </div>

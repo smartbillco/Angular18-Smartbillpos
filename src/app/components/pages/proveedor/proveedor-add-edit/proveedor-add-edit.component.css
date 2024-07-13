@@ -1,0 +1,26 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px; /* Espacio entre columnas */
+}
+
+.column {
+  flex: 1; /* Cada columna toma igual espacio disponible */
+  min-width: 200px; /* Ancho mínimo para cada columna */
+}
+
+mat-form-field {
+  width: 100%; /* El campo de formulario debe ocupar todo el ancho de la columna */
+}
+
+.error {
+  color: rgb(255, 0, 0); /* Cambia el color del texto a rojo */
+  font-size: 14px;
+  margin-top: -10px; /* Agrega un margen superior */
+  height: auto; /* Ajusta la altura automáticamente */
+  text-align: left; /* Alinea el texto a la izquierda */
+}
+
+.error strong {
+  font-weight: 900; /* Aumenta el grosor del texto en negrita */
+}

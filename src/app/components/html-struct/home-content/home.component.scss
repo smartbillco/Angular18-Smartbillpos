@@ -1,0 +1,67 @@
+@import url('../../../../assets/css/app.minxy.css');
+
+
+/* Hacer que el contenedor principal tenga un tamaño fijo */
+.main-container {
+    width: 300px; /* Puedes ajustar este valor según tus necesidades */
+  }
+  
+  /* Hacer que el botón ocupe todo el ancho */
+  .full-width-button {
+    width: 100%;
+    display: block; /* Asegurar que sea un elemento de bloque */
+    padding: 3px; /* Agregar algo de relleno para mejor apariencia */
+    margin-right: 8px; /* Espacio entre el icono y el texto */
+    align-items: center;
+    gap: 5px; /* Espacio entre el icono y el texto */
+    background-color: #007bff; /* Puedes cambiar el color de fondo */
+    color: white; /* Color del texto */
+    border: none; /* Eliminar el borde predeterminado */
+    border-radius: 4px; /* Opcional: bordes redondeados */
+    font-size: 16px; /* Ajustar el tamaño de la fuente según sea necesario */
+    cursor: pointer; /* Agregar un cursor de puntero al pasar el ratón */
+    margin-bottom: 10px;
+  }
+  
+  /* Opcional: agregar algunos efectos al pasar el ratón para mejor UX */
+  .full-width-button:hover {
+    background-color: #0056b3; /* Oscurecer el botón al pasar el ratón */
+  }
+  
+  .image-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding-top: 56.25%; /* Aspect Ratio 16:9 */
+  }
+  
+  .image-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Mantiene la proporción de la imagen */
+  }
+  
+  .quick-stats__item {
+    margin-top: 0px; /* Añadir algo de espacio superior */
+  }
+
+  .quick-stats__item.bg-amber {
+    max-height: 65px;
+    /* Otros estilos opcionales */
+}
+
+.quick-stats__item.bg-amber small {
+  color: rgb(47, 50, 65);
+}
+
+.image-container img {
+  transition: transform 0.2s ease-in-out; /* Transición suave de 0.2 segundos */
+}
+
+.image-container img:hover {
+  transform: scale(1.1); /* Aumenta la escala al 110% */
+}
+

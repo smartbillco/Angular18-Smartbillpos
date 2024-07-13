@@ -1,0 +1,49 @@
+<h5>Subir Archivos XML</h5>
+
+<div class="file-drop-area"
+  (drop)="onDrop($event)"
+  (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave($event)">
+  <p>Arrastra tus archivos aquí o haz click para seleccionar</p>
+  <input type="file" multiple (change)="onFileSelected($event)" #fileInput />
+  <button mat-button color="primary" (click)="fileInput.click()">Seleccionar Archivos</button>
+</div>
+
+<!-- Contenedor con tamaño fijo para la lista de archivos -->
+<div class="file-list-container">
+  <!-- Lista de archivos cargados -->
+  <mat-accordion *ngIf="files.length > 0">
+    <mat-expansion-panel *ngFor="let file of files">
+      <mat-expansion-panel-header (click)="togglePanel(file)">
+        <mat-panel-title>
+          <mat-icon>insert_drive_file</mat-icon>
+
+          <span class="file-name">
+            {{ getFileName(file) }}
+            <span *ngIf="showInvoiceInfo && file.companyName && companyTotals[file.companyName] !== undefined" class="invoice-number"># [{{ companyCount[file.companyName] }}]</span>
+            <span *ngIf="showInvoiceInfo && file.companyName && companyTotals[file.companyName] !== undefined" class="total-content"> 
+              FACTURADO [ {{ companyTotals[file.companyName] | currency:'COP':'symbol':'1.2-2' }} ]
+            </span>
+          </span>
+          
+          <span class="file-status" [ngClass]="getFileStatusClass(file.validated)">
+            {{ getFileStatusLabel(file.validated, file) }}
+          </span>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <p *ngIf="file.expanded && file.description_xml">{{ file.description_xml }}</p>
+      <button mat-button color="accent" *ngIf="file.expanded" (click)="togglePanel(file)">Cerrar Descripción</button>
+      <button mat-button color="accent" *ngIf="!file.expanded" (click)="togglePanel(file)">Expandir Descripción</button>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <!-- Mensaje si no hay archivos cargados -->
+  <div *ngIf="files.length === 0">
+    <p>No se han cargado archivos.</p>
+  </div>
+</div>
+
+<div>
+  <button mat-button color="primary" (click)="onProcess()" [disabled]="files.length === 0 || processing">Procesar</button>
+</div>

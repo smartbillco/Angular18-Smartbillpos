@@ -1,0 +1,40 @@
+<mat-tab-group  class="custom-tab-group" animationDuration="2000ms">
+  <div class="tab-content">
+    <mat-tab label="Detalle del producto">
+      <p class="detalle-fila"><strong>CATEGORIA: </strong> {{element.idCategoria}}</p>
+      <p class="detalle-fila"><strong>PROVEEDOR: </strong> {{element.idProveedor}}</p>
+      <p class="detalle-fila"><strong>CODIGO: </strong> {{element.codigo}}</p>
+      <p class="detalle-fila"><strong>DESCRIPCION: </strong> {{element.descripcion}}</p>
+
+      <div class="detalle-side">
+        <div class="detalle-foto">
+          <ng-container *ngIf="element.foto; else noFoto">
+            <img [src]="element.foto" alt="Foto del producto">
+          </ng-container>
+          <ng-template class="detalle-foto" #noFoto>
+            <p>No hay foto disponible</p>
+          </ng-template>
+        </div>
+        <div class="detalle-barra">
+          <!--
+          <app-barcode
+            [value]="element.codigoBarra"
+            bc-format="CODE128"
+            [bc-display-value]="true"
+            bc-width="2"
+            bc-height="50">
+          </app-barcode>
+          -->
+        </div>
+      </div>
+
+    </mat-tab>
+
+    <mat-tab label="Inventario">
+      
+      <app-producto-mov [element]="element"></app-producto-mov>
+     
+    </mat-tab>
+
+  </div>
+</mat-tab-group>

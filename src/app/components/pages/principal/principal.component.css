@@ -1,0 +1,140 @@
+
+
+
+
+/* Estilos para el header */
+#header {
+  background-color: rgba(55, 81, 126, 0.9); /* Fondo semi-transparente */
+  position: fixed; /* Fijo en la parte superior */
+  top: 0;
+  width: 100%;
+  height: 13%;
+  z-index: 1000; 
+  transition: background-color 0.3s ease; 
+}
+/*
+#header .container {
+  max-width: 1200px;
+  margin: 0 auto; 
+  padding: 10px 20px;
+  display: flex;
+  align-items: center; 
+  justify-content: space-between; 
+}
+
+#header .logo {
+  font-size: 24px; 
+  font-weight: bold;
+  color: #fff; 
+  text-decoration: none;
+}
+
+#header .logo:hover {
+  opacity: 0.8; 
+}
+
+#header .navbar {
+  display: flex;
+  align-items: center;
+}
+
+#header .navbar ul {
+  list-style: none; 
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+#header .navbar ul li {
+  margin-right: 20px; 
+}
+
+#header .nav-link {
+  color: #fff; 
+  font-size: 16px; 
+  text-decoration: none; 
+  transition: color 0.3s; 
+}
+
+#header .nav-link:hover {
+  color: #77aec0; 
+}
+
+#header .getstarted {
+  background-color: #007bff; 
+  color: #fff; 
+  padding: 10px 20px; 
+  border-radius: 5px; 
+  text-decoration: none;
+  transition: background-color 0.3s; 
+}*/
+
+#header .getstarted:hover {
+  background-color: #0057b369; /* Color al pasar el mouse */
+}
+
+/*
+#hero {
+
+  background-size: cover; 
+  background-position: center; 
+  color: #fff; 
+  padding: 100px 0; 
+  text-align: center; 
+}
+
+#hero h1 {
+  font-size: 48px; 
+  font-weight: bold; 
+  margin-bottom: 20px; 
+}
+
+#hero h2 {
+  font-size: 24px; 
+  margin-bottom: 30px;
+}
+
+#hero .btn-get-started {
+  background-color: #007bff; 
+  color: #fff; 
+  padding: 12px 24px; 
+  border-radius: 5px; 
+  text-decoration: none; 
+  transition: background-color 0.3s; 
+}
+
+#hero .btn-get-started:hover {
+  background-color: #0056b3;
+}
+
+#cliens {
+  background-color: #f4f4f4; 
+  padding: 60px 0; 
+  text-align: center; 
+}
+
+#cliens .img-fluid {
+  max-width: 100%;
+  height: auto; 
+  margin-bottom: 30px; 
+}
+
+
+.smartbill-container {
+  color: rgb(206, 221, 209); 
+  font-size: 24px; 
+  font-weight: bold; 
+  text-align: center; 
+ 
+  padding: 15px;
+  margin-bottom: 20px; 
+  border-radius: 5px;
+
+ 
+  justify-content: center;
+  align-items: center; 
+}
+
+.white-text-button {
+  color: white !important;
+}*/
