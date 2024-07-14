@@ -1,0 +1,148 @@
+<h2 mat-dialog-title>{{ operacion }} Producto</h2>
+
+<form [formGroup]="form" (ngSubmit)="guardarProducto()">
+  <mat-dialog-content class="mat-typography">
+    <div class="row">
+     
+      <div class="column">
+        <mat-form-field>
+          <mat-label>Tipo identificación</mat-label>
+          <mat-select formControlName="tipoIdentificacion">
+            <mat-option *ngFor="let item of listTipos" [value]="item">{{item}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('tipoIdentificacion')?.hasError('required') && form.get('tipoIdentificacion')?.touched">
+            Tipo de Identificación es <strong>requerida</strong>
+          </span>
+        </div>
+      </div>
+
+      <div class="column">
+        <mat-form-field appearance="fill">
+          <mat-label>Identificación</mat-label>
+          <input formControlName="identificacion" matInput placeholder="Ingrese Identificación" autocomplete="off">
+        </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('identificacion')?.hasError('required') && form.get('identificacion')?.touched">
+            Identificación es <strong>requerida</strong>
+          </span>
+          <span *ngIf="form.get('identificacion')?.hasError('pattern') && form.get('identificacion')?.touched">
+            Identificación debe contener solo <strong>números</strong>
+          </span>
+          <span *ngIf="form.get('identificacion')?.hasError('minlength') && form.get('identificacion')?.touched">
+            Identificación debe tener mínimo <strong>5 dígitos</strong>
+          </span>
+          <span *ngIf="form.get('identificacion')?.hasError('maxlength')">
+            Identificación debe tener máximo <strong>10 dígitos</strong>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="fill">
+          <mat-label>Nombre</mat-label>
+          <input formControlName="nombre" matInput placeholder="Ingrese Nombre" autocomplete="off">
+        </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('nombre')?.hasError('required') && form.get('nombre')?.touched">
+            Nombre es <strong>requerido</strong>
+          </span>
+
+          <span *ngIf="form.get('nombre')?.hasError('minlength') ">
+            Nombre debe tener mínimo <strong>5 caracteres</strong>
+          </span>
+
+          <span *ngIf="form.get('nombre')?.hasError('maxlength')">
+            Nombre debe tener máximo <strong>30 caracteres</strong>
+          </span>
+        </div>
+      </div>
+      
+      <div class="column">
+
+        <mat-form-field appearance="fill">
+          <mat-label>Celular</mat-label>
+          <input formControlName="celular" matInput placeholder="Ingrese Celular" autocomplete="off">
+        </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('celular')?.hasError('required') && form.get('celular')?.touched">
+            Celular es <strong>requerido</strong>
+          </span>
+          <span *ngIf="form.get('celular')?.hasError('pattern') && form.get('celular')?.touched">
+            Celular debe contener solo <strong>números</strong>
+          </span>
+          <span *ngIf="form.get('celular')?.hasError('minlength') && form.get('celular')?.touched">
+            Celular debe tener exactamente <strong>10 dígitos</strong>
+          </span>
+          <span *ngIf="form.get('celular')?.hasError('maxlength')">
+            Celular debe tener exactamente <strong>10 dígitos</strong>
+          </span>
+        </div>
+        
+      </div>
+      <!--
+     -->
+    </div>
+
+    <div class="row">
+      <div class="column">
+        <mat-form-field class="example-full-width">
+          <mat-label>Fecha Nacimiento</mat-label>
+          <input [max]="maxDate" formControlName="fechaNacimiento" matInput [matDatepicker]="picker">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('fechaNacimiento')?.hasError('required') && form.get('fechaNacimiento')?.touched">
+            Fecha de nacimiento es <strong>requerida</strong>
+          </span>
+        </div>
+
+      </div>
+
+      <div class="column">
+        <mat-form-field appearance="fill">
+          <mat-label>Dirección</mat-label>
+          <input formControlName="direccion" matInput placeholder="Ingrese Dirección" autocomplete="off">
+        </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('direccion')?.hasError('required') && form.get('direccion')?.touched">
+            Dirección es <strong>requerida</strong>
+          </span>
+          <span *ngIf="form.get('direccion')?.hasError('minlength') && form.get('direccion')?.touched">
+            Dirección debe tener mínimo <strong>5 caracteres</strong>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="fill">
+          <mat-label>Correo</mat-label>
+          <input formControlName="correo" matInput placeholder="Ingrese Correo" autocomplete="off">
+        </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('correo')?.hasError('required') && form.get('correo')?.touched">
+            Correo es <strong>requerido</strong>
+          </span>
+          <span *ngIf="form.get('correo')?.hasError('email') && form.get('correo')?.touched">
+            Correo debe ser <strong>válido</strong>
+          </span>
+          <span *ngIf="form.get('correo')?.hasError('minlength') && form.get('correo')?.touched">
+            Correo debe tener mínimo <strong>5 caracteres</strong>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button type="button" (click)="cancelar()" mat-button>Cancelar</button>
+    <button [disabled]="form.invalid" type="submit" mat-button >Guardar</button>
+  </mat-dialog-actions>
+</form>

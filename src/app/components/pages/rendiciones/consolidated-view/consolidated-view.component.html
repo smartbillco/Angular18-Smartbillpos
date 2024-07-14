@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Consolidado de Facturas</h2>
+<mat-dialog-content>
+  <ul>
+    <li *ngFor="let invoice of data.invoices">
+      {{ invoice.fileName }} - Total: {{ invoice.total | currency }}
+    </li>
+  </ul>
+
+  <h3>Sumatoria Total: {{ totalSum | currency }}</h3>
+  
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="generatePDF()">Descargar PDF</button>
+  <button mat-button (click)="closeDialog()">Salir</button>
+</mat-dialog-actions>

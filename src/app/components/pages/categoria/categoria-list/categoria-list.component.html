@@ -1,0 +1,65 @@
+<!-- Suscripción a eventos en los componentes hijo -->
+<app-header [placeholder]="'Buscar Categoria...'" (search)="applyFilter($event)"></app-header>
+
+<!-- Encabezado principal -->
+<div style="display: flex; justify-content: space-between; align-items: center; background-color: #f3f3f3; padding: 10px;">
+  <app-logo></app-logo>
+
+  <h6 class="titulo" style="flex: 70%; font-size: 17px; font-weight: bold;">GESTION CATEGORIAS</h6>
+  <div style="flex: 30%; display: flex; justify-content: flex-end; align-items: center;">
+    <button class="btn btn-light btn--icon-text" routerLink="/home"><i class="zmdi zmdi-home"></i> Home</button>
+
+    <!-- Suscripción a eventos en los componentes hijo -->
+    <app-categoria-menu 
+      (addProduct)="Modal_addEditCategoria()"
+      (exportExcel)="exportAsExcel()"
+      (exportPdf)="exportAsPdf()">
+    </app-categoria-menu>
+
+  </div>
+</div>
+
+<table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8" multiTemplateDataRows>
+  <ng-container matColumnDef="idCategoriaProducto">
+    <th class="blue-header centered-header padded-header"  *matHeaderCellDef mat-sort-header > CODIGO </th>
+    <td mat-cell *matCellDef="let element"> {{element.idCategoriaProducto}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="nombre" >
+    <th  class="blue-header centered-header padded-header"  *matHeaderCellDef mat-sort-header > CATEGORIAS </th>
+    <td mat-cell *matCellDef="let element"   > {{element.nombre}} </td>
+  </ng-container>
+
+ 
+  <ng-container matColumnDef="acciones">
+    <th  *matHeaderCellDef class="blue-header centered-header padded-header">ACCIONES</th>
+    <td mat-cell *matCellDef="let element">
+      <i (click)="eliminarCategoria(element)" class="far fa-trash-alt icon-large icon-delete" matTooltip="Eliminar Proveedor {{element.nombre}} "></i>
+      <span style="margin-left: 8px;"></span>
+      <i (click)="Modal_addEditCategoria(element)" class="fas fa-cog icon-large icon-edit" matTooltip="Editar Proveedor {{element.nombre}} "></i>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="element-row"
+      [class.expanded-row]="expandedElement === row"
+      (click)="toggleRow(row)">
+  </tr>
+
+  <ng-container matColumnDef="expandedDetail">
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+    <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+      <div class="element-detail" [@detailExpand]="expandedElement === element ? 'expanded' : 'collapsed'">
+
+        <div class="detail-column">
+            <!-- Pasamos el elemento seleccionado al componente hijo
+            <app-proveedor-det [element]="element"></app-proveedor-det> -->
+        </div>
+        
+      </div>
+    </td>
+  </ng-container>
+
+</table>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>

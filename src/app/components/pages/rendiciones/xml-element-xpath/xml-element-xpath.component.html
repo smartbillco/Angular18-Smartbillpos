@@ -1,0 +1,16 @@
+<div>
+    <h2>Buscar XPath de Elemento en XML</h2>
+    <input type="file" (change)="onFileSelected($event)" accept=".xml" />
+    <br /><br />
+    <label for="elementName">Nombre del Elemento (ej. cbc:PayableAmount):</label>
+    <input type="text" id="elementName" [(ngModel)]="elementName" />
+    <button (click)="findXPath()">Buscar XPath</button>
+  
+    <div *ngIf="error" style="color: red;">{{ error }}</div>
+    <div *ngIf="xpathResult">
+      <p>El XPath de '{{ elementName }}' es:</p>
+      <pre>{{ xpathResult.xpath }}</pre>
+      <p>Valor del elemento:</p>
+      <pre>{{ xpathResult.value }}</pre>
+    </div>
+  </div>

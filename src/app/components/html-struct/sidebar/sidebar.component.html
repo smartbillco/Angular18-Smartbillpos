@@ -1,0 +1,50 @@
+ <!--<aside class="sidebar sidebar--hidden">-->
+
+<aside class="sidebar sidebar--hidde">
+  <div class="scrollbar-inner">
+    <!--<div class="sidebar">
+    Botones principales con menús desplegables -->
+    <button mat-icon-button routerLink="/home" matTooltip="Inicio" aria-label="Inicio">
+      <mat-icon>home</mat-icon>
+    </button>
+  
+    <button mat-icon-button routerLink="http_x" matTooltip="Ventas" aria-label="Ventas">
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
+
+    <button mat-icon-button routerLink="/empresa" matTooltip="Empresas" aria-label="Empresas">
+      <mat-icon>apartment</mat-icon>
+    </button>
+  
+    <button mat-icon-button [matMenuTriggerFor]="menu4" matTooltip="Administracion" aria-label="Administracion">
+      <mat-icon>building</mat-icon>
+    </button>
+    <mat-menu #menu4="matMenu">
+      <button mat-menu-item routerLink="categorias">Categorias</button>
+      <button mat-menu-item routerLink="proveedores">Proveedores</button>
+      <button mat-menu-item routerLink="clientes">Clientes</button>
+      <button mat-menu-item routerLink="/empresa">Empleados</button>
+      <button mat-menu-item routerLink="/empresa">Productos</button>
+      <button mat-menu-item routerLink="/empresa">Caja</button>
+      <button mat-menu-item routerLink="/empresa">Consultar Facturas</button>
+      <button mat-menu-item routerLink="/empresa">rangos Dian</button>
+
+    </mat-menu>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu5" matTooltip="Contabilidad" aria-label="Contabilidad">
+      <mat-icon>price_change</mat-icon>
+    </button>
+    <mat-menu #menu5="matMenu">
+      <button mat-menu-item>Consultar Cuentas por Pagar</button>
+      <button mat-menu-item>Facturas proveedores</button>
+    </mat-menu>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu6" matTooltip="kardex" aria-label="kardex">
+      <mat-icon>keyboard_command_key</mat-icon>
+    </button>
+    <mat-menu #menu6="matMenu">
+      <button mat-menu-item>Productos</button>
+    </mat-menu>
+
+  </div>
+</aside>

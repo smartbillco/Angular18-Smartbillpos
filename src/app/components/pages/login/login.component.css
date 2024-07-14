@@ -1,0 +1,135 @@
+/* Estilos generales */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0; /* Fondo gris claro */
+  font-family: 'Roboto', sans-serif;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 300px;
+  padding: 1.5rem; /* Reducimos el padding para hacerlo más compacto */
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.95); /* Fondo blanco semi-transparente */
+  height: 400px; /* Ajustamos la altura */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centramos contenido verticalmente */
+  text-align: center;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem; /* Reducimos el margen inferior */
+}
+
+.logo {
+  width: 50px; /* Tamaño ajustable del logo */
+  height: auto;
+  margin-right: 0.5rem; /* Reducimos el margen derecho */
+  border-radius: 50%; /* Forma circular para el logo */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.app-name {
+  font-size: 2.5rem; /* Tamaño grande */
+  font-weight: 700; /* Negrita */
+  color: #1a521c; /* Color verde */
+  margin: 0; /* Eliminar margen */
+  text-transform: uppercase; /* Texto en mayúsculas */
+  letter-spacing: 1px; /* Espaciado entre letras */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+  background: linear-gradient(45deg, #4CAF50, #3E9F3E); /* Gradiente de colores */
+  -webkit-background-clip: text; /* Clip de fondo para aplicar el gradiente - para WebKit */
+  background-clip: text; /* Clip de fondo para aplicar el gradiente */
+  -webkit-text-fill-color: transparent; /* Color de texto transparente para mostrar el gradiente */
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* Estilos para el formulario */
+mat-form-field {
+  width: 100%;
+  margin-bottom: 1rem; /* Reducimos el margen inferior del formulario */
+}
+
+mat-label {
+  color: #555; /* Color del texto gris medio */
+}
+
+/* Estilos para el botón de ingreso */
+button[type="submit"] {
+  margin-top: 1rem; /* Ajustamos el margen superior */
+  height: 3rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Estilos para los botones de inicio de sesión social */
+.social-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: auto; /* Ajustado para separación moderada en la parte inferior */
+}
+
+.social-button {
+  width: 100%;
+  margin-bottom: 0.5rem; /* Reducimos el espacio inferior */
+  text-transform: none;
+  font-weight: 600;
+  height: 2.5rem; /* Ajustamos la altura de los botones */
+}
+
+.social-button.google-button {
+  background-color: #ffffff; /* Color de fondo blanco */
+  color: rgb(0, 0, 0); /* Color del texto negro */
+}
+
+.social-button.google-button:hover {
+  background-color: #f1f1f1; /* Rojo más oscuro al pasar el cursor */
+}
+
+.social-button.facebook-button {
+  background-color: #3b5998; /* Azul de Facebook */
+  color: white;
+}
+
+.social-button.facebook-button:hover {
+  background-color: #2d4373; /* Azul más oscuro al pasar el cursor */
+}
+
+.social-button mat-icon {
+  margin-right: 0.5rem; /* Añadimos margen derecho al icono */
+}
+
+.social-button span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Estilos para el enlace de registro */
+.signup-link {
+  text-align: center;
+  margin-top: 0.5rem; /* Reducimos el margen superior */
+}
+
+.signup-link a {
+  color: #4a90e2; /* Color azul */
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s;
+}
+
+.signup-link a:hover {
+  color: #3e78c2; /* Color azul más oscuro al pasar el cursor */
+}
