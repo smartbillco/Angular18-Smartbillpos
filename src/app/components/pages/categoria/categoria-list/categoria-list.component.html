@@ -1,20 +1,22 @@
-<!-- Suscripción a eventos en los componentes hijo -->
+<!-- Suscripción a eventos en los componentes hijo
 <app-header [placeholder]="'Buscar Categoria...'" (search)="applyFilter($event)"></app-header>
+ -->
 
 <!-- Encabezado principal -->
 <div style="display: flex; justify-content: space-between; align-items: center; background-color: #f3f3f3; padding: 10px;">
+  <!--
   <app-logo></app-logo>
-
+  -->
   <h6 class="titulo" style="flex: 70%; font-size: 17px; font-weight: bold;">GESTION CATEGORIAS</h6>
   <div style="flex: 30%; display: flex; justify-content: flex-end; align-items: center;">
     <button class="btn btn-light btn--icon-text" routerLink="/home"><i class="zmdi zmdi-home"></i> Home</button>
 
-    <!-- Suscripción a eventos en los componentes hijo -->
+    <!-- Suscripción a eventos en los componentes hijo 
     <app-categoria-menu 
       (addProduct)="Modal_addEditCategoria()"
       (exportExcel)="exportAsExcel()"
       (exportPdf)="exportAsPdf()">
-    </app-categoria-menu>
+    </app-categoria-menu>-->
 
   </div>
 </div>
