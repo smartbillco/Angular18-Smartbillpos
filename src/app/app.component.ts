@@ -1,6 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { LoaderService } from './services/loader.service';
+import { LoaderService } from './services/utilidad/loader.service';
 import { AuthService } from './services/auth.service';
 
 @Component({

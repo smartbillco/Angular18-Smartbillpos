@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { XmlProcessingService } from '../../../../services/xml-processing.service';
-import { InvoiceProcessingService } from '../../../../services/invoice-processing.service';
+import { XmlProcessingService } from '../../../../services/rendicion/xml-processing.service';
+import { InvoiceProcessingService } from '../../../../services/rendicion/invoice-processing.service';
 import { Data } from '@angular/router';
 
 // Definición de la interfaz para los archivos cargados

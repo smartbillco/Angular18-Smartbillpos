@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { XmlProcessingService } from '../../../../services/xml-processing.service';
-import { InvoiceProcessingService } from '../../../../services/invoice-processing.service';
 import { ToastrService } from 'ngx-toastr';
+import { FileUploadService } from '../../../../services/rendicion/file-upload.service';
 
 export interface Company {
   registrationName: string;
-  invoices: Invoice[];
   totalFacturado: number;
+  invoices: Invoice[];
+
   expanded: boolean;
 }
 
@@ -16,24 +16,27 @@ export interface Invoice {
   issueTime: string;
   totalFactura: number;
   description_Xml_Hijo_Json: any;
-  expanded: boolean;
   descriptionsItem: string[];
-  precioItem: number[];
+  precioItem: number[]; 
+
+  expanded: boolean;
 }
 
-export interface UploadedFile {
+export interface UploadedFile { 
   file: File;
-  validated: 'pending' | 'valid' | 'invalid';
-  descriptionsItem: string[];
-  companyName: string;
-  facturaNumber: string;
-  totalFactura: number;
-  fechaFactura: Date;
-  timefactura: string;
-  precioItem: number[];
+  validated: 'pending' | 'valid' | 'invalid'; 
   expanded: boolean;
+  
+  companyName: string;
+  descriptionsItem: string[]; 
+  precioItem: number[];
+  facturaNumber: string;
+  fechaFactura: Date;
+  timefactura: string;  
+  totalFactura: number;
   description_Xml_Hijo_Json: any | undefined;
 }
+
 
 @Component({
   selector: 'app-company-invoice-list',
@@ -41,51 +44,24 @@ export interface UploadedFile {
   styleUrls: ['./company-invoice-list.component.css']
 })
 export class CompanyInvoiceListComponent implements OnInit {
-  companies: Company[] = [];
-  processing: boolean = false;
   files: UploadedFile[] = []; // Array para almacenar los archivos subidos
-  showInvoiceInfo = false;
-  totalFacturado: number = 0;
+  companies: Company[] = [];
+  totalFacturado: number = 0;  
   companiesChart: Company[] = []; // Inicializa como un array vacío
+  showInvoiceInfo     = false; 
+  processing: boolean = false;
 
   constructor(
-    private xmlProcessingService: XmlProcessingService,
-    private invoiceProcessingService: InvoiceProcessingService,
+    private fileUploadService: FileUploadService,
     private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
-    // Llamar a loadCompanies() aquí para cargar los datos al inicializar el componente
-    // this.loadCompaniesChart();
   }
 
   loadCompaniesChart(): void {
     this.companiesChart = [...this.companies]; // Copiar el arreglo de companies a companiesChart
-    console.log('xx Datos cargados en company-invoice-list.component:', this.companiesChart);
-  /*
-    this.companiesChart = [
-      {
-        registrationName: 'Empresa A',
-        invoices: [
-          { documentReference: 'Ref1', issueDate: new Date(), issueTime: '10:00', totalFactura: 100, description_Xml_Hijo_Json: {}, expanded: false, descriptionsItem: [], precioItem: [] }
-        ],
-        totalFacturado: 100,
-        expanded: false
-      },
-      {
-        registrationName: 'Empresa B',
-        invoices: [
-          { documentReference: 'Ref2', issueDate: new Date(), issueTime: '12:00', totalFactura: 200, description_Xml_Hijo_Json: {}, expanded: false, descriptionsItem: [], precioItem: [] }
-        ],
-        totalFacturado: 200,
-        expanded: false
-      }
-      // Agrega más empresas según sea necesario
-    ];
-  
-    console.log('Datos cargados encompany-invoice-list.component:', this.companiesChart);
-  }
-  */
+    console.log('Datos cargados en company-invoice-list.component:', this.companiesChart);
   }
 
   // Manejar la selección de archivos desde input
@@ -123,56 +99,15 @@ export class CompanyInvoiceListComponent implements OnInit {
 
   async processFiles(files: FileList | File[]): Promise<void> {
     this.processing = true;
-    const fileList = Array.from(files); // Convertir FileList o File[] a un array
-
     this.showInvoiceInfo = true;
     this.totalFacturado = 0;
 
-    for (const file of fileList) {
-      try {
-        const result = await this.xmlProcessingService.processFile(file);
-        this.addInvoiceToCompany(result);
-        this.loadCompaniesChart(); // Actualizar companiesChart después de cada archivo procesado
-      } catch (error: any) {
-        this.toastr.error(`Error procesando el archivo ${file.name}: ${error.message || 'Error desconocido'}`, 'Error');
-      }
-    }
+    const { companies, totalFacturado } = await this.fileUploadService.processFiles(files, this.companies, this.totalFacturado);
+    this.companies = companies;
+    this.totalFacturado = totalFacturado;
+    this.loadCompaniesChart();
 
     this.processing = false;
-  }
-
-  addInvoiceToCompany(invoiceData: any): void {
-    const companyIndex = this.companies.findIndex(company => company.registrationName === invoiceData.registrationName);
-
-    const descriptionsItem: string[] = [];
-    const precioItem: number[] = [];
-    this.invoiceProcessingService.extractdescriptionsItem(this.invoiceProcessingService.convertDescriptionToVariables(invoiceData.descripXmlHijoJson), descriptionsItem);
-    this.invoiceProcessingService.extractprecioItem(this.invoiceProcessingService.convertDescriptionToVariables(invoiceData.descripXmlHijoJson), precioItem);
-
-    const invoice: Invoice = {
-      documentReference: invoiceData.documentReference,
-      issueDate: invoiceData.issueDate,
-      issueTime: invoiceData.issueTime,
-      totalFactura: invoiceData.totalFactura,
-      description_Xml_Hijo_Json: invoiceData.descripXmlHijoJson,
-      expanded: false,
-      descriptionsItem,
-      precioItem
-    };
-
-    this.totalFacturado += invoice.totalFactura; // Sumar el total de la factura al totalFacturado
-
-    if (companyIndex !== -1) {
-      this.companies[companyIndex].invoices.push(invoice);
-      this.companies[companyIndex].totalFacturado += invoice.totalFactura;
-    } else {
-      this.companies.push({
-        registrationName: invoiceData.registrationName,
-        invoices: [invoice],
-        totalFacturado: invoice.totalFactura,
-        expanded: false
-      });
-    }
   }
 
   toggleCompany(company: Company): void {

@@ -14,9 +14,8 @@ import { Subscription } from "rxjs";
 import { ChangeDetectorRef } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import * as XLSX from 'xlsx';
-import { ConfirmationService } from "../../../../services/confirmation.service";
+import { ConfirmationService } from "../../../../services/utilidad/confirmation.service";
 import { SearchService } from "../../../../services/search.service.ts.service";
-import { SharedModule } from '../../../../shared/shared.module'; // Ajusta la ruta según la ubicación real
 
 
 @Component({

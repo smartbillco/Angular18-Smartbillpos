@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Cliente } from "../../../../models/cliente";
 import { ClientesService } from "../../../../services/clientes.service";
 import { ToastrService } from 'ngx-toastr';
-import { NotificationService} from '../../../../services/notification-service.service';
+import { NotificationService} from '../../../../services/utilidad/twilio/notification-service.service';
 
 /**
  * Interfaz para describir la estructura esperada de los datos del diálogo del cliente.

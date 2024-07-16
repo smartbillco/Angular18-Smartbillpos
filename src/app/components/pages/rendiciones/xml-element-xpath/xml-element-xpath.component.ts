@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { XmlPathService } from '../../../../services/xml-path-service.service';
+import { XmlPathService } from '../../../../services/rendicion/xml-path-service.service';
 
 interface XPathResult {
   xpath: string;

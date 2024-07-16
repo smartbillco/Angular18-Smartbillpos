@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ScriptLoaderService } from '../../../services/script-loader.service';
+import { ScriptLoaderService } from '../../../services/utilidad/script-loader.service';
 
 @Component({
   selector: 'app-principal',

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Constantes } from '../../comun/constantes';
-import { Rol } from '../../models/seguridad/rol';
-import { Permiso } from '../../models/seguridad/permiso';
-import { PermisoRol } from '../../models/seguridad/permiso-rol';
+import { Constantes } from '../../../comun/constantes';
+import { Rol } from '../../../models/seguridad/rol';
+import { Permiso } from '../../../models/seguridad/permiso';
+import { PermisoRol } from '../../../models/seguridad/permiso-rol';
 
 @Injectable({
   providedIn: 'root'

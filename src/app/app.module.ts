@@ -12,7 +12,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { appRoutingProviders } from './app.routing';
 import { AppRoutingModule } from './app-routing.module';
 import { Constantes } from './comun/constantes';
-import { LoaderService } from './services/loader.service';
+import { LoaderService } from './services/utilidad/loader.service';
 import { LoaderInterceptor } from './interceptors/loader-interceptor';
 import { SharedModule } from './shared/shared.module';
 
@@ -28,7 +28,7 @@ import { FileUploadModalComponent } from './components/pages/rendiciones/file-up
 import { ConsolidatedViewComponent } from './components/pages/rendiciones/consolidated-view/consolidated-view.component';
 import { XmlElementXpathComponent } from './components/pages/rendiciones/xml-element-xpath/xml-element-xpath.component';
 import { ThemeSwitchComponent } from './components/complementos/theme-switch/theme-switch.component';
-import { ConfirmationService } from './services/confirmation.service';
+import { ConfirmationService } from './services/utilidad/confirmation.service';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { CompanyInvoiceChartComponent } from './components/pages/rendiciones/company-invoice-chart/company-invoice-chart.component';
 import { CompanyInvoiceListComponent } from './components/pages/rendiciones/company-invoice-list/company-invoice-list.component';
