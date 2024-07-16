@@ -6,7 +6,6 @@
   margin-top: 20px; /* Opcional: añade un margen superior */
 }
 
-
 .file-drop-area {
   border: 2px dashed #007bff;
   padding: 20px;
@@ -49,6 +48,10 @@ li:hover {
   color: #dc3545;
 }
 
+.file-icon {
+  margin-right: 8px; /* Ajusta el margen derecho del icono */
+}
+
 .file-name {
   margin-right: 8px; /* Ajusta el margen derecho según sea necesario */
   font-size: 14px; /* Ajusta el tamaño de fuente */
@@ -64,6 +67,7 @@ li:hover {
   color: #277a9b; /* Azul bajito */
   font-weight: bold;
   margin-left: 8px;
+  margin-right: 20px; /* Añade un margen derecho para separar del estado del archivo */
   font-size: 14px; /* Ajusta el tamaño de fuente */
 }
 
@@ -84,5 +88,44 @@ li:hover {
 }
 
 .file-name, .invoice-number, .total-content, .file-status {
-  font-size: 12px; /* Ajusta el tamaño de fuente según sea necesario */
+  font-size: 11px; /* Ajusta el tamaño de fuente según sea necesario */
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.total-facturado {
+  margin-left: 20px; /* Añade un margen izquierdo para separar del botón */
+  font-size: 14px; /* Ajusta el tamaño de fuente */
+  color: #277a9b; /* Ajusta el color según sea necesario */
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-left {
+  flex: 1; /* Ocupa todo el espacio restante */
+}
+
+.footer-right {
+  margin-left: auto; /* Empuja hacia la derecha tanto como sea posible */
+}
+
+.invoice-section {
+  font-size: 10px; /* Ajusta el tamaño de fuente para la sección de facturas */
+}
+
+.invoice-section ul li {
+  font-size: 10px; /* Ajusta el tamaño de fuente para cada elemento de la lista de facturas */
+}
+
+.invoice-section h6 {
+  font-size: 11px; /* Ajusta el tamaño de fuente para el título de la sección de facturas */
 }

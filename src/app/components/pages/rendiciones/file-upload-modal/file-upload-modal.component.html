@@ -1,4 +1,4 @@
-<h5>Subir Archivos XML</h5>
+<h5>Subir información financiera Formato Zip o Xml</h5>
 
 <div class="file-drop-area"
   (drop)="onDrop($event)"
@@ -16,25 +16,43 @@
     <mat-expansion-panel *ngFor="let file of files">
       <mat-expansion-panel-header (click)="togglePanel(file)">
         <mat-panel-title>
-          <mat-icon>insert_drive_file</mat-icon>
-
+          <mat-icon class="file-icon" matTooltip="Abrir PDF">insert_drive_file</mat-icon>
           <span class="file-name">
             {{ getFileName(file) }}
-            <span *ngIf="showInvoiceInfo && file.companyName && companyTotals[file.companyName] !== undefined" class="invoice-number"># [{{ companyCount[file.companyName] }}]</span>
-            <span *ngIf="showInvoiceInfo && file.companyName && companyTotals[file.companyName] !== undefined" class="total-content"> 
-              FACTURADO [ {{ companyTotals[file.companyName] | currency:'COP':'symbol':'1.2-2' }} ]
+
+            <!-- Valor de la factura -->
+            <span *ngIf="showInvoiceInfo && file.companyName && file.totalFactura !== undefined" class="total-content">
+              {{ file.totalFactura | currency:'':'symbol':'1.2-2' }}
             </span>
-          </span>
-          
-          <span class="file-status" [ngClass]="getFileStatusClass(file.validated)">
-            {{ getFileStatusLabel(file.validated, file) }}
+            
+            <span class="file-status" [ngClass]="getFileStatusClass(file.validated)">
+              {{ getFileStatusLabel(file.validated, file) }}
+            </span>
+
+            <span *ngIf="file.facturaNumber" class="factura-number">
+              Factura: {{ file.facturaNumber }}
+            </span>
+
           </span>
         </mat-panel-title>
       </mat-expansion-panel-header>
+      
+      <div *ngIf="file.expanded && file.description_Xml_Hijo_Json">
+        <div class="invoice-info">
+          <div class="invoice-section">
+            <h6 style="font-size: 12px;">Descripciones y Montos:</h6>
+            <ul>
+              <li *ngFor="let description of file.descriptionsItem; let i = index" style="font-size: 12px;">
+                {{ description }} - {{ file.precioItem[i] | currency:'$ ':'symbol':'1.2-2' }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
-      <p *ngIf="file.expanded && file.description_xml">{{ file.description_xml }}</p>
-      <button mat-button color="accent" *ngIf="file.expanded" (click)="togglePanel(file)">Cerrar Descripción</button>
-      <button mat-button color="accent" *ngIf="!file.expanded" (click)="togglePanel(file)">Expandir Descripción</button>
+            <!-- Mostrar el JSON de descripción 
+            <pre>{{ file.description_Xml_Hijo_Json | json }}</pre>-->
+
     </mat-expansion-panel>
   </mat-accordion>
 
@@ -44,6 +62,15 @@
   </div>
 </div>
 
-<div>
-  <button mat-button color="primary" (click)="onProcess()" [disabled]="files.length === 0 || processing">Procesar</button>
+<div class="footer-container">
+  <div class="footer-left">
+    <button mat-button color="primary" (click)="onProcess()" [disabled]="files.length === 0 || processing">Procesar Archivos</button>
+    <button mat-button color="warn" (click)="clearFileList()">Borrar Lista</button>
+  </div>
+  
+  <!-- Contenedor para el total facturado -->
+  <div *ngIf="showInvoiceInfo" class="total-container">
+    <span class="total-label">Total Facturado:</span>
+    <span class="total-amount">{{ totalFacturado | currency:'COP ':'symbol':'1.2-2' }}</span>
+  </div>
 </div>

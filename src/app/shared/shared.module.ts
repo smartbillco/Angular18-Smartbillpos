@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-// Importaciones de Angular Material
+// Angular Material Imports
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -18,9 +18,17 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
+import {MatBadgeModule} from '@angular/material/badge';
+
+// Custom Components
+import { LogoComponent } from '../components/complementos/logo/logo.component';
+import { HeaderComponent } from '../components/html-struct/header/header.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    LogoComponent,
+    HeaderComponent
+  ],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -39,7 +47,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     ReactiveFormsModule,
     MatTabsModule,
     MatExpansionModule,
-    
+    MatBadgeModule,
   ],
   exports: [
     MatButtonModule,
@@ -58,7 +66,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
     ReactiveFormsModule,
     MatTabsModule,
     MatExpansionModule,
-    
+    LogoComponent,
+    HeaderComponent,
+    MatBadgeModule
   ]
 })
 export class SharedModule { }
