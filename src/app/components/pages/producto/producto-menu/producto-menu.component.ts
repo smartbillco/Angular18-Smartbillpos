@@ -1,45 +1,39 @@
-/*
-  //comunicacion para la funcion que proviene de componentes padres
-  @Output() addProduct = new EventEmitter<void>(); // producto-add-edit.component.ts
-  @Output() exportExcel  = new EventEmitter<void>(); // producto-list.component.ts
-  @Output() exportPdf    = new EventEmitter<void>(); // producto-list.component.ts
-  @Output() subirArchivo = new EventEmitter<void>();
-*/
-
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
+/**
+ * Componente de menú para gestionar productos.
+ */
 @Component({
   selector: 'app-producto-menu',
   templateUrl: './producto-menu.component.html',
   styleUrls: ['./producto-menu.component.css']
 })
 export class ProductoMenuComponent {
-  //comunicacion para la funcion que proviene de componentes padres
-  @Output() addProduct   = new EventEmitter<void>(); // producto-add-edit.component.ts
-  @Output() exportExcel  = new EventEmitter<void>(); // producto-list.component.ts
-  @Output() exportPdf    = new EventEmitter<void>(); // producto-list.component.ts
-  @Output() SubirArchivo = new EventEmitter<void>();
+  @Output() addOrEditProduct      = new EventEmitter<void>(); // Emite al abrir el modal para añadir o editar un producto.
+  @Output() exportProductsToExcel = new EventEmitter<void>(); // Emite para exportar datos a Excel.
+  @Output() exportProductsToPdf   = new EventEmitter<void>(); // Emite para exportar datos a PDF.
+  @Output() uploadProductFile     = new EventEmitter<void>(); // Emite para iniciar la subida de un archivo.
 
   constructor(private router: Router) {}
 
-  onAddProduct() {
-    this.addProduct.emit();
+  onAddOrEditProduct() {
+    this.addOrEditProduct.emit(); // Abre el modal para añadir o editar un producto.
   }
 
-  exportAsExcel() {
-    this.exportExcel.emit();
+  exportProductsToExcelFile() {
+    this.exportProductsToExcel.emit(); // Exporta los datos a un archivo Excel.
   }
 
-  exportAsPdf() {
-    this.exportPdf.emit();
+  exportProductsToPdfFile() {
+    this.exportProductsToPdf.emit(); // Exporta los datos a un archivo PDF.
   }
 
-  subirAsArchivo() {
-    this.SubirArchivo.emit();
+  initiateFileUploadProducts() {
+    this.uploadProductFile.emit(); // Inicia el proceso de subida de archivos.
   }
 
-  navigate(route: string) {
-    this.router.navigateByUrl(route);
+  navigateToRoute(route: string) {
+    this.router.navigateByUrl(route); // Navega a la ruta especificada.
   }
 }

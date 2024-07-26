@@ -3,12 +3,13 @@
 </button>
 
 <mat-menu #menu="matMenu">
-  <button mat-menu-item (click)="onAddProduct()"> <mat-icon>add_circle</mat-icon> <span>Nuevo Producto</span> </button>
-  <button mat-menu-item [matMenuTriggerFor]="menuCompras"><mat-icon>shopping_cart_checkout</mat-icon>Compras y devolucion</button> 
-  <button mat-menu-item [matMenuTriggerFor]="menuExport"><mat-icon>upgrade</mat-icon>Exportar</button>  
+
+  <button mat-menu-item (click)="onAddOrEditProduct()">    <mat-icon>add_circle</mat-icon> <span>Nuevo Producto</span> </button>
+  <button mat-menu-item [matMenuTriggerFor]="menuCompras"> <mat-icon>shopping_cart_checkout</mat-icon>Compras y devolucion</button> 
+  <button mat-menu-item [matMenuTriggerFor]="menuExport">  <mat-icon>upgrade</mat-icon>Exportar</button>  
   
   
-  <button mat-menu-item (click)="subirAsArchivo()">
+  <button mat-menu-item (click)="initiateFileUploadProducts()">
     <mat-icon>cloud_upload</mat-icon>
     <span>Cargar archivo con productos</span>
   </button>
@@ -27,11 +28,11 @@
 </mat-menu>
 
 <mat-menu #menuExport="matMenu" >
-  <button mat-menu-item  (click)="exportAsExcel()">
+  <button mat-menu-item  (click)="exportProductsToExcelFile()">
     <mat-icon>insert_drive_file</mat-icon>
     <span>Excel</span>
   </button>
-  <button mat-menu-item  (click)="exportAsPdf()">
+  <button mat-menu-item  (click)="exportProductsToPdfFile()">
     <mat-icon>picture_as_pdf</mat-icon>
     <span>PDF</span>
   </button>

@@ -16,7 +16,8 @@ import { ChangeDetectorRef } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import * as XLSX from 'xlsx';
 import { ConfirmationService } from "../../../../services/utilidad/confirmation.service";
-import { SearchService } from '../../../../services/search.service.ts.service';
+import { SearchService } from '../../../../services/search.service';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-producto-list',
@@ -44,14 +45,13 @@ export class ProductoListComponent implements OnInit, AfterViewInit, OnDestroy {
   private subscriptions: Subscription[] = [];
 
   //se definen un EventEmitter para que el componente padre 
-  //(producto-menu.component.ts) pueda suscribirse a él y ejecutar las funciones.
+  //(producto-menu.component.ts) pueda suscribirse aqui y ejecutar las funciones.
 
-  @Output() addProduct  = new EventEmitter<void>();
-  @Output() exportExcel  = new EventEmitter<void>();
-  @Output() exportPdf    = new EventEmitter<void>();
-  @Output() SubirArchivo = new EventEmitter<void>();
-
-  
+  // Emiciones recibidas para interacciones con el componente padre [ producto-menu.component.ts ]
+  @Output() addOrEditProduct      = new EventEmitter<void>(); // Abre el modal para añadir o editar un producto
+  @Output() exportProductsToExcel = new EventEmitter<void>(); // Exporta los datos a Excel
+  @Output() exportProductsToPdf   = new EventEmitter<void>(); // Exporta los datos a PDF
+  @Output() uploadProductFile     = new EventEmitter<void>(); // Inicia el proceso de subida de archivos
 
   constructor(
     public dialog: MatDialog,
@@ -119,6 +119,9 @@ export class ProductoListComponent implements OnInit, AfterViewInit, OnDestroy {
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
           this.cdr.detectChanges();
+          
+          // Convertir los datos a JSON y mostrarlos en una alerta
+          //alert(JSON.stringify(data, null, 2));
         },
         error: (error: HttpErrorResponse) => {
           this.handleError(error);
@@ -128,6 +131,7 @@ export class ProductoListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   eliminarProducto(producto: Producto) {
+
     this._confirmationService.confirm(`¿Estás seguro que deseas eliminar al Producto ${producto.nombre} con CEDULA ${producto.idProducto} ?`, '1000ms', '1500ms')
       .subscribe(confirmed => {
         if (confirmed) {
@@ -179,10 +183,6 @@ export class ProductoListComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
    // Agregar estas funciones para escuchar los eventos emitidos
-
-
-
-
   
   exportAsExcel() {
     const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.dataSource.data);

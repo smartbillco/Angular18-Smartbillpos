@@ -44,6 +44,8 @@ export class ProductosService {
     return this.http.post(Constantes.HOST + Constantes.POST_PRODUCTOS, producto, { headers: httpHeaders });
   }
 
+
+
   updateProducto(producto: Producto) {
     const httpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -77,10 +79,29 @@ export class ProductosService {
     return this.http.get(`${Constantes.HOST}${Constantes.GET_PRODUCTOS}/${tipoNegocio}`);
   }
 
+   /*
+  
+      @GetMapping("getDisponibles/{idEmpresa}")
+    public String getDisponibles(@PathVariable("idEmpresa") String idEmpresa) {
+
+        return gson.toJson(daoProducto.getDisponibles(Integer.parseInt(idEmpresa)));
+
+    }
+        */
   getProductosDisponibles() {
     let idEmpresa = localStorage.getItem("idEmpresa");
     return this.http.get(Constantes.HOST + Constantes.GET_PRODUCTOS_DISPONIBLES + "/" + idEmpresa);
   }
+
+  /*
+  @GetMapping("getByCategory")
+  public String getProductosPorCategoria(HttpServletRequest request, HttpServletResponse response) {
+
+      int idCategory = (Integer) (request.getAttribute("idCategoria"));
+
+      return gson.toJson(daoProducto.getByCategory(idCategory));
+
+  }*/
   
   uploadFile(file: File): Observable<any> {
     let url = Constantes.HOST + Constantes.POST_ARCHIVO_PRODUCTOS + this.idEmpresa;

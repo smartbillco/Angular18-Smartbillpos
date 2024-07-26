@@ -1,9 +1,40 @@
-:host {
-    display: block;
-    width: 100%;
+  /* */
+   
+   .chart-container {
+    position: relative;
+    height: 240px; 
+    width: 100%; 
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
   }
   
   canvas {
-    width: 100% !important;
-    height: auto !important;
+  display: block;
+  width:  100% !important; 
+  height: 100% !important;
+  }
+
+  
+  .no-data-icon {
+    display: flex;
+    flex-direction: column; /* Alinea los elementos hijos verticalmente */
+    justify-content: center; /* Centra los elementos hijos verticalmente */
+    align-items: center; /* Centra los elementos hijos horizontalmente */
+    position: absolute; /* Posiciona el ícono y el mensaje en el centro del contenedor */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8); /* Opcional: color de fondo semitransparente para mejorar la visibilidad del ícono y mensaje */
+    text-align: center; /* Alinea el texto al centro */
+  }
+  
+  .no-data-icon i {
+    font-size: 6rem; /* Ajusta el tamaño del ícono aquí */
+    margin-bottom: 10px; /* Espacio entre el ícono y el mensaje */
+  }
+  
+  .no-data-icon p {
+    font-size: 1.5rem; /* Ajusta el tamaño del texto del mensaje aquí */
   }

@@ -1,0 +1,14 @@
+<div>
+    <input type="text" [(ngModel)]="companyName" placeholder="Filtrar empresa">
+    <input type="date" [(ngModel)]="startDate" placeholder="Fecha de inicio"  matTooltip="Fecha de inicio" >
+    <input type="date" [(ngModel)]="endDate" placeholder="Fecha final" matTooltip="Fecha final">
+
+<!-- Añadir iconos en los botones -->
+<button (click)="applyFilter()" matTooltip="Filtrar" mat-button>
+    <mat-icon >search</mat-icon>
+</button>
+  <button (click)="clearFilter()" matTooltip="Quitar filtro" mat-button>
+    <mat-icon >clear</mat-icon> 
+  </button>
+
+  </div>

@@ -18,7 +18,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
-import {MatBadgeModule} from '@angular/material/badge';
+import { MatBadgeModule } from '@angular/material/badge';
+import {MatCardModule} from '@angular/material/card';
+
 
 // Custom Components
 import { LogoComponent } from '../components/complementos/logo/logo.component';
@@ -48,6 +50,7 @@ import { HeaderComponent } from '../components/html-struct/header/header.compone
     MatTabsModule,
     MatExpansionModule,
     MatBadgeModule,
+    MatCardModule,
   ],
   exports: [
     MatButtonModule,
@@ -68,7 +71,9 @@ import { HeaderComponent } from '../components/html-struct/header/header.compone
     MatExpansionModule,
     LogoComponent,
     HeaderComponent,
-    MatBadgeModule
+    MatBadgeModule,
+    MatCardModule,
+
   ]
 })
 export class SharedModule { }

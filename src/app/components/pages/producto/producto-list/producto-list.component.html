@@ -1,5 +1,3 @@
-
-
 <div class="row">
   <div class="col-md-6">
     <div class="card">
@@ -14,11 +12,14 @@
         <div style="flex: 30%; display: flex; justify-content: flex-end; align-items: center;">
           <button class="btn btn-light btn--icon-text" routerLink="/home"><i class="zmdi zmdi-home"></i> Home</button>
 
+
+
           <!-- Suscripción a eventos en los componentes hijo -->
           <app-producto-menu 
-            (addProduct)="Modal_addEditProducto()"
-            (exportExcel)="exportAsExcel()"
-            (exportPdf)="exportAsPdf()">
+            (addOrEditProduct)      = "Modal_addEditProducto()"
+            (exportProductsToExcel) = "exportAsExcel()"
+            (exportProductsToPdf)   = "exportAsPdf()"
+            (uploadProductFile)     = "subirArchivo()">
           </app-producto-menu>
         </div>
       </div>

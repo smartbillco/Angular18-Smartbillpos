@@ -1,15 +1,26 @@
-<!-- Suscripción a eventos en los componentes hijo -->
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <!-- ------------------------------------------------------------ -->
+      <!-- Suscripción a eventos en los componentes hijo -->
+      <app-header [placeholder]="'Buscar Proveedor...'" (search)="applyFilter($event)"></app-header>
 
-<!-- Encabezado principal -->
-<div style="display: flex; justify-content: space-between; align-items: center; background-color: #f3f3f3; padding: 10px;">
- 
+      <!-- Encabezado principal con borde resaltado -->
+      <div style="display: flex; justify-content: space-between; align-items: center; border: 2px solid #ffffff; background-color: #f3f3f3; padding: 10px;">
+        <app-logo></app-logo>
+        <h6 class="titulo" style="flex: 70%; font-size: 17px; font-weight: bold;">GESTION PROVEEDOR</h6>
+        <div style="flex: 30%; display: flex; justify-content: flex-end; align-items: center;">
+          <button class="btn btn-light btn--icon-text" routerLink="/home"><i class="zmdi zmdi-home"></i> Home</button>
 
-  <h6 class="titulo" style="flex: 70%; font-size: 17px; font-weight: bold;">GESTION PROVEEDOR</h6>
-  <div style="flex: 30%; display: flex; justify-content: flex-end; align-items: center;">
-    <button class="btn btn-light btn--icon-text" routerLink="/home"><i class="zmdi zmdi-home"></i> Home</button>
 
     <!-- Suscripción a eventos en los componentes hijo -->
-
+          <!-- Suscripción a eventos en los componentes hijo -->
+          <app-proveedor-menu 
+            (addOrEditProveedor)       = "Modal_addEditProveedor()"
+            (exportProveedoresToExcel) = "exportAsExcel()"
+            (exportProveedoresToPdf)   = "exportAsPdf()"
+            (uploadProveedorFile)      = "subirArchivo()">
+          </app-proveedor-menu>
 
   </div>
 </div>
@@ -58,4 +69,23 @@
 
 </table>
 
-<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+      <!-- Paginación -->
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+      <!-- ------------------------------------------------------------ -->
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card">
+       <!-- ------------------------------------------------------------ -->
+      <div style="display: flex; justify-content: space-between; align-items: center; border: 2px solid #ffffff; background-color: #e2dcdc; padding: 10px;">
+        <h6 class="titulo" style="flex: 100%; font-size: 17px; font-weight: bold;">REPORTE PROVEEDOR</h6>
+      </div>
+      
+     <!-- <app-producto-report ></app-producto-report>
+       ------------------------------------------------------------ -->
+  </div>      
+  
+
+
+</div>

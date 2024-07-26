@@ -89,14 +89,28 @@ export class ProductoAddEditComponent implements OnInit {
       const Producto = this.data?.element_tabla;
       if (Producto) {
         this.form.patchValue({
-          /*
-          tipoIdentificacion: Producto.tipoIdentificacion,
-          identificacion: Producto.identificacion,
-          nombre: Producto.nombre,
-          celular: Producto.celular,
-          direccion: Producto.direccion,
-          correo: Producto.correo,
-          fechaNacimiento: Producto.fechaNacimiento,*/
+          idProducto: Producto.idProducto,
+          idCategoria:Producto.idCategoria,
+          idProveedor: Producto.idProveedor,
+          idEmpresa: Producto.idEmpresa,
+          costo: Producto.costo ,
+          inventario: Producto.inventario ,
+          minStock: Producto.minStock ,
+          maxStock: Producto.maxStock ,
+          precioMinimo: Producto.precioMinimo ,
+          idUnidadMedida: Producto.idUnidadMedida ,
+          codigo: Producto.codigo ,
+          nombre: Producto.nombre ,
+          precio: Producto.precio ,
+          codigoBarra: Producto.codigoBarra ,
+          foto: Producto.foto ,
+          descripcion: Producto.descripcion ,
+          categoria: Producto.categoria ,
+          proveedor: Producto.proveedor ,
+          tipoNegocio: Producto.tipoNegocio ,
+          impoconsumo: Producto.impoconsumo ,
+          ivaTasa: Producto.ivaTasa ,
+          impoconsumoTasa: Producto.impoconsumoTasa ,
         });
       }
     }

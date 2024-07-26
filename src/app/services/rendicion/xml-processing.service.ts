@@ -18,12 +18,10 @@ export class XmlProcessingService {
 
       const xmlContent = new XMLSerializer().serializeToString(xmlDoc);
 
-      const descriptionXml_hijo = this.extractElementText(xmlDoc, "//cac:Attachment/cac:ExternalReference/cbc:Description");
-      if (!descriptionXml_hijo) {
-        throw new Error("No se encontró la descripción en el XML");
+      const id = this.extractElementText(xmlDoc, "//cac:SenderParty/cac:PartyTaxScheme/cbc:CompanyID");
+      if (!id) {
+        throw new Error("No se encontró id de la empresa en el XML");
       }
-
-      const descriptionXml_hijo_Json = await this.convertXmlToJson(descriptionXml_hijo);
 
       const registrationName = this.extractElementText(xmlDoc, "//cac:SenderParty/cac:PartyTaxScheme/cbc:RegistrationName");
       if (!registrationName) {
@@ -46,12 +44,34 @@ export class XmlProcessingService {
         throw new Error("No se encontró la hora de la factura en el XML");
       }
 
-      const totalFactura = parseFloat(descriptionXml_hijo_Json['Invoice']['cac:LegalMonetaryTotal']['cbc:PayableAmount']._text);
-      if (!totalFactura) {
-        throw new Error("No se encontró el valor total de la factura en el XML");
+      //------------------------------------------------------------------------------
+      const xmlContentDescription = this.extractElementText(xmlDoc, "//cac:Attachment/cac:ExternalReference/cbc:Description");
+      if (!xmlContentDescription) {
+        throw new Error("No se encontró la descripción en el XML");
       }
 
-      return { documentReference, registrationName, issueDate, issueTime: issueTimeString, descripXmlHijoJson: descriptionXml_hijo_Json, totalFactura, xmlContent };
+      const xmlContentDescriptionJson = await this.convertXmlToJson(xmlContentDescription);
+
+      let totalFactura;
+      if (xmlContentDescriptionJson['Invoice'] && xmlContentDescriptionJson['Invoice']['cac:LegalMonetaryTotal']['cbc:PayableAmount']._text) {
+        totalFactura = parseFloat(xmlContentDescriptionJson['Invoice']['cac:LegalMonetaryTotal']['cbc:PayableAmount']._text);
+      } else if (xmlContentDescriptionJson['CreditNote'] && xmlContentDescriptionJson['CreditNote']['cac:LegalMonetaryTotal']['cbc:PayableAmount']._text) {
+        totalFactura = parseFloat(xmlContentDescriptionJson['CreditNote']['cac:LegalMonetaryTotal']['cbc:PayableAmount']._text);
+      } else {
+        throw new Error("No se encontró el valor total de la factura en el XML");
+      }
+      //------------------------------------------------------------------------------
+
+      return {
+        id,
+        registrationName,
+        documentReference,
+        issueDate,
+        issueTime: issueTimeString,
+        totalFactura,
+        xmlContent,
+        xmlContentDescriptionJson,
+      };
     } catch (error: any) {
       throw new Error(`Error al procesar el archivo XML: ${error.message || error}`);
     }

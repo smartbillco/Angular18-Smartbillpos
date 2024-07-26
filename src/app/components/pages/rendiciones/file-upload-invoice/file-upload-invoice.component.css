@@ -1,0 +1,185 @@
+.footer-left, .delete-button, .total-container, .footer-container, .toolbar, .button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /*flex: 1;*/
+}
+
+.delete-button {
+  color: red;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  margin-right: 10px;
+}
+
+.delete-button .icon-delete {
+  font-size: 20px;
+  margin-right: 5px;
+  color: red;
+}
+
+.delete-button span {
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+.file-list-container {
+  max-height: 148px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-top: 20px;
+  max-width: 100%;
+  transition: all 0.3s ease-in-out;
+}
+
+.file-list-container.maximized {
+  max-height: 100%;
+}
+
+.file-drop-area {
+  position: relative;
+  padding: 20px;
+  border: 2px dashed #007bff;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.file-drop-area.dragover {
+  border-color: #0056b3;
+}
+
+.file-drop-area input[type="file"] {
+  display: none;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  transition: background-color 0.3s ease;
+}
+
+li:hover {
+  background-color: #e9ecef;
+}
+
+.mat-icon {
+  margin-right: 8px;
+}
+
+.invoice-section {
+  padding: 10px;
+  background-color: #f3e0ce;
+  border-radius: 4px;
+}
+
+.invoice-section h6 {
+  font-size: 12px;
+}
+
+.invoice-section ul li {
+  font-size: 10px;
+}
+
+.total-label {
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.total-amount {
+  font-size: 14px;
+  color: #277a9b;
+}
+
+.company-name {
+  font-size: 10px;
+  font-weight: bold;
+  display: inline-block;
+  width: calc(100% - 24px);
+  text-justify: distribute-all-lines;
+}
+
+.invoice-header {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.invoice-header:hover {
+  background-color: #e0e0e0;
+}
+
+.invoice {
+  margin-bottom: 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+
+.invoice:hover {
+  border-color: #007bff;
+}
+
+.invoice-document {
+  font-weight: bold;
+  color: #333;
+}
+
+.invoice-date {
+  font-style: italic;
+  color: #666;
+}
+
+.invoice-value {
+  font-weight: bold;
+  color: #277a9b;
+}
+
+.invoice-document,
+.invoice-date,
+.invoice-value {
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 12px;
+}
+
+.valid-file {
+  color: #007bff;
+}
+
+.invalid-file {
+  color: #dc3545;
+}
+
+.file-upload-invoice {
+  transition: all 0.3s ease-in-out;
+}
+
+.file-upload-invoice.maximized {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: 1000;
+  overflow: auto;
+  padding: 16px;
+}
+
+

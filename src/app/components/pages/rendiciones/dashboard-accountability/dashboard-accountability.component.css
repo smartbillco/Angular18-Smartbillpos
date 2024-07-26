@@ -1,0 +1,189 @@
+.footer-left {
+  display: flex; /* Flexbox */
+  align-items: center; /* Alineación de elementos */
+}
+
+.delete-button {
+  display: flex; /* Flexbox */
+  align-items: center; /* Alineación de elementos */
+  color: red; /* Color del texto y del icono */
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  margin-right: 10px; /* Espacio entre el botón y el texto de empresas cargadas */
+}
+
+.delete-button .icon-delete {
+  font-size: 20px; /* Aumenta el tamaño del icono */
+  margin-right: 5px; /* Espacio entre el icono y la leyenda */
+  color: red; /* Color del icono */
+}
+
+.delete-button span {
+  margin-left: 10px; /* Espacio entre el texto "Limpiar lista" y el número de empresas */
+  font-size: 14px; /* Ajuste el tamaño del texto si es necesario */
+}
+
+/* Otros estilos */
+.file-list-container {
+  max-height: 200px; /* Ajusta el tamaño según tus necesidades */
+  overflow-y: auto; /* Habilita el desplazamiento vertical */
+  border: 1px solid #ddd; /* Borde para resaltar el contenedor */
+  padding: 10px; /* Relleno interno */
+  margin-top: 20px; /* Margen superior */
+}
+
+/* Otros estilos */
+.file-list-container2 {
+  max-height: 900px; /* Ajusta el tamaño según tus necesidades */
+  overflow-y: auto; /* Habilita el desplazamiento vertical */
+  border: 1px solid #ddd; /* Borde para resaltar el contenedor */
+  padding: 10px; /* Relleno interno */
+  margin-top: 20px; /* Margen superior */
+}
+
+.file-drop-area {
+  border: 2px dashed #007bff; /* Borde punteado azul */
+  padding: 20px; /* Relleno */
+  text-align: center; /* Alineación central del texto */
+  cursor: pointer; /* Cambia el cursor a mano */
+  transition: border-color 0.3s ease; /* Transición suave para el color del borde */
+}
+
+.file-drop-area.dragover {
+  border-color: #0056b3; /* Color del borde al arrastrar sobre él */
+}
+
+.file-drop-area input[type="file"] {
+  display: none; /* Oculta el input de tipo file */
+}
+
+ul {
+  list-style-type: none; /* Elimina los estilos de viñetas */
+  padding: 0; /* Elimina el relleno predeterminado */
+}
+
+li {
+  margin-top: 10px; /* Margen superior */
+  padding: 10px; /* Relleno */
+  border: 1px solid #ddd; /* Borde delgado */
+  border-radius: 4px; /* Bordes redondeados */
+  background-color: #f9f9f9; /* Fondo gris claro */
+  transition: background-color 0.3s ease; /* Transición suave para el color de fondo */
+}
+
+li:hover {
+  background-color: #e9ecef; /* Color de fondo al pasar el mouse */
+}
+
+.mat-icon {
+  margin-right: 8px; /* Margen derecho */
+}
+
+.invoice-section {
+  padding: 10px; /* Relleno */
+  background-color: #f3e0ce; /* Fondo naranja suave */
+  border-radius: 4px; /* Bordes redondeados */
+}
+
+.invoice-section h6 {
+  font-size: 12px; /* Tamaño de fuente */
+}
+
+.invoice-section ul li {
+  font-size: 10px; /* Tamaño de fuente */
+}
+
+.footer-container {
+  display: flex; /* Flexbox */
+  justify-content: space-between; /* Distribución de espacio */
+  align-items: center; /* Alineación de elementos */
+  margin-top: 20px; /* Margen superior */
+}
+
+.total-container {
+  display: flex; /* Flexbox */
+  align-items: center; /* Alineación de elementos */
+}
+
+.total-label {
+  margin-right: 10px; /* Margen derecho */
+  font-size: 14px; /* Tamaño de fuente */
+}
+
+.total-amount {
+  font-size: 14px; /* Tamaño de fuente */
+  color: #277a9b; /* Color */
+}
+
+.company-name {
+  font-size: 10px; /* Tamaño de fuente */
+  font-weight: bold; /* Negrita */
+  display: inline-block; /* Bloque en línea */
+  width: calc(100% - 24px); /* Ancho */
+  text-justify: distribute-all-lines; /* Justificación de texto */
+}
+
+.invoice-header {
+  background-color: #f0f0f0; /* Color de fondo */
+  padding: 10px; /* Relleno */
+  border-radius: 4px; /* Bordes redondeados */
+  transition: background-color 0.3s ease; /* Transición suave para el color de fondo */
+}
+
+.invoice-header:hover {
+  background-color: #e0e0e0; /* Color de fondo al pasar el mouse */
+}
+
+.invoice {
+  margin-bottom: 0; /* Elimina el margen inferior */
+  border: 1px solid #ddd; /* Borde delgado */
+  border-radius: 4px; /* Bordes redondeados */
+  transition: border-color 0.3s ease; /* Transición suave para el color del borde */
+}
+
+.invoice:hover {
+  border-color: #007bff; /* Color del borde al pasar el mouse */
+}
+
+.invoice-document {
+  font-weight: bold; /* Negrita */
+  color: #333; /* Color personalizado */
+}
+
+.invoice-date {
+  font-style: italic; /* Cursiva */
+  color: #666; /* Otro color personalizado */
+}
+
+.invoice-value {
+  font-weight: bold; /* Negrita */
+  color: #277a9b; /* Color personalizado */
+}
+
+.invoice-document,
+.invoice-date,
+.invoice-value {
+  display: inline-block; /* Asegura que cada span se muestre en línea */
+  margin-right: 10px; /* Ajusta el margen entre los spans */
+  font-size: 12px; /* Tamaño de fuente más pequeño */
+}
+
+.valid-file {
+  color: #007bff;
+}
+
+.invalid-file {
+  color: #dc3545;
+}
+
+.bold-text {
+  font-weight: bold;
+  color: rgb(13, 26, 61);
+
+}
+
+
+  
+  

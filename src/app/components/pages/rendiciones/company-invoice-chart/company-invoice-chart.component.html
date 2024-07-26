@@ -1,3 +1,27 @@
-<div class="chart-container" style="position: relative; height: 40vh; width: 100%;">
+
+
+
+<div class="chart-container">
+
+<!---->
+  <div *ngIf="!hasData" class="no-data-icon">
+    
+    <i class="fas fa-chart-bar fa-3x"></i> 
+    <p>No hay datos para mostrar</p>
+
+  </div>
+
   <canvas id="myChart"></canvas>
+
 </div>
+
+ <!--
+ <div>
+  <label for="chartType"></label>
+  <select id="chartType" (change)="onChartTypeChange($event)">
+    <option value="line">Grafica Línea</option>
+    <option value="bar">Grafica Barra</option>
+    <option value="doughnut">Grafica Pastel</option>
+   
+  </select>
+</div>-->

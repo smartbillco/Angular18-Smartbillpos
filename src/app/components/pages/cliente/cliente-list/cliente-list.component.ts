@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { Component, AfterViewInit, OnDestroy, OnInit, ViewChild, EventEmitter, Output } from "@angular/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Usuario } from "../../../../models/usuario";
 import { Cliente } from "../../../../models/cliente";
@@ -15,7 +15,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import * as XLSX from 'xlsx';
 import { ConfirmationService } from "../../../../services/utilidad/confirmation.service";
-import { SearchService } from "../../../../services/search.service.ts.service";
+import { SearchService } from "../../../../services/search.service";
 
 
 @Component({
@@ -43,6 +43,13 @@ export class ClienteListComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   private subscriptions: Subscription[] = [];
+
+  
+  @Output() addOrEditCustomer      = new EventEmitter<void>(); // Emite al abrir el modal para añadir o editar un producto.
+  @Output() exportCustomerToExcel  = new EventEmitter<void>(); // Emite para exportar datos a Excel.
+  @Output() exportCustomerToPdf    = new EventEmitter<void>(); // Emite para exportar datos a PDF.
+  @Output() uploadCustomerFile     = new EventEmitter<void>(); // Emite para iniciar la subida de un archivo.
+
 
   constructor(
     public dialog: MatDialog,

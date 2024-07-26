@@ -1,0 +1,51 @@
+.top-nav {
+    display: flex; /* Utiliza flexbox para alinear los elementos */
+    align-items: center; /* Alinea verticalmente en el centro */
+    list-style: none; /* Elimina los puntos de lista por defecto */
+    padding: 0; /* Elimina el padding por defecto */
+    margin: 0; /* Elimina el margen por defecto */
+  }
+  
+  .top-nav li {
+    margin: 0 10px; /* Espacio horizontal entre los elementos */
+  }
+  
+  
+
+
+
+
+
+ 
+  .user-info-item {
+    position: relative;
+    padding: 0 15px; /* Espaciado a los lados del ítem */
+  }
+  
+  .user-info-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Alinea el contenido al final (derecha) */
+  }
+  
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    text-align: right; /* Alinea el texto a la derecha */
+    margin-right: 10px; /* Espacio entre la información del usuario y el ícono */
+  }
+  
+  .user-rol, .user-name {
+    font-size: 12px; /* Tamaño de fuente más pequeño */
+    margin: 0; /* Elimina márgenes adicionales */
+  }
+  
+  .user-rol {
+    font-weight: bold; /* Negrita para el rol del usuario */
+  }
+  
+  .user-icon {
+    font-size: 20px; /* Tamaño del ícono */
+    margin-left: 0; /* Elimina margen izquierdo para que esté pegado a la información */
+  }
+  

@@ -1,0 +1,96 @@
+<div class="file-upload-invoice" [class.maximized]="isMaximized">
+
+  <div class="file-drop-area"
+       (drop)="onDrop($event)"
+       (dragover)="onDragOver($event)"
+       (dragleave)="onDragLeave($event)">
+    <input type="file" multiple (change)="onFileSelected($event)" #fileInput style="display: none;" />
+
+    <div class="button-container">
+      <button class="left-button" mat-button color="primary" (click)="fileInput.click()" matTooltip="Subir Facturas">
+        <i class="fas fa-cloud-upload-alt fa-2x"></i> <!-- Icono de subir archivo -->
+      </button>
+      <p>Arrastra o sube tus archivos en Formato Zip o XML</p>
+   
+      <button class="right-button" mat-button (click)="toggleMaximize()" matTooltip="Maximizar ventana">
+        <i [ngClass]="isMaximized ? 'fas fa-compress fa-2x' : 'fas fa-expand fa-2x'"></i>
+      </button>
+    </div>
+
+  </div>
+
+  <app-filter-invoice (filterChanged)="applyFilter($event)"></app-filter-invoice>
+
+
+
+
+  <!-- Contenedor con tamaño fijo para la lista de archivos -->
+  <div class="file-list-container" [class.maximized]="isMaximized">
+    <!-- Lista de empresas y facturas -->
+    <mat-expansion-panel *ngFor="let company of companies">
+      <mat-expansion-panel-header (click)="toggleExpansion(company)">
+        <mat-panel-title>
+          <mat-icon matBadge="{{ company.invoices.length }}" matTooltip="Contiene {{ company.invoices.length }} Facturas" matBadgeColor="accent">receipt</mat-icon>
+          <span class="company-name">{{ company.registrationName }}</span>
+        </mat-panel-title>
+        <mat-panel-description>
+          <span class="company-name">Total Facturado: {{ company.totalFacturado | currency }}</span>
+          <span [ngClass]="{
+            'valid-file': company.validated === 'valid',
+            'invalid-file': company.validated === 'invalid'
+          }">
+          </span>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="invoices" *ngIf="company.expanded">
+        <div *ngFor="let invoice of company.invoices" class="invoicex" (click)="toggleExpansion(invoice)">
+          <div class="invoice-header">
+            <span class="invoice-document">Factura [ {{ invoice.documentReference }} ]</span>
+            <span class="invoice-date">Fecha {{ invoice.issueDate | date }}</span>
+            <span class="invoice-value">Valor {{ invoice.totalFactura | currency }}</span>
+          </div>
+
+          <div *ngIf="invoice.expanded && invoice.description_Xml_Hijo_Json" class="invoice-details">
+            <div class="invoice-info">
+              <div class="invoice-section">
+                <h6 style="font-size: 12px;">Descripciones y Montos:</h6>
+                <ul>
+                  <li *ngFor="let description of invoice.descriptionsItem; let i = index" style="font-size: 12px;">
+                    {{ description }} - {{ invoice.precioItem[i] | currency:'$ ':'symbol':'1.2-2' }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+
+    <!-- Mensaje si no hay empresas cargadas -->
+    <div *ngIf="companies.length === 0">
+      <p>No se han cargado empresas.</p>
+    </div>
+  </div>
+
+  <!-- -->
+  <div class="footer-container">
+    <div class="footer-left">
+      <button mat-button (click)="clearCompanyList()" matTooltip="Borrar Tablero" class="delete-button">
+        <i class="icon-delete">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+            <path d="m760-183-85 84-56-56 84-85-84-85 56-56 85 84 85-84 56 56-84 85 84 85-56 56-85-84ZM240-80q-50 0-85-35t-35-85v-120h120v-560h600v415q-19-7-39-10.5t-41-3.5v-321H320v480h214q-7 19-10.5 39t-3.5 41H200v40q0 17 11.5 28.5T240-160h294q8 23 20 43t28 37H240Zm120-520v-80h360v80H360Zm0 120v-80h360v80H360Zm174 320H200h334Z"/>
+          </svg>
+        </i>
+        <span *ngIf="companies.length > 0">{{ companies.length }} Empresas</span>
+      </button>
+    </div>
+
+    <div *ngIf="showInvoiceInfo" class="total-container">
+      <span class="total-label">Total Facturado:</span>
+      <span class="total-amount">{{ totalFacturado | currency:'COP ':'symbol':'1.2-2' }}</span>
+    </div>
+
+ 
+  </div>
+</div>

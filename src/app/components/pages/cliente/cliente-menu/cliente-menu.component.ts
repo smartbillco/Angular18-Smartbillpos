@@ -8,29 +8,29 @@ import { Router } from '@angular/router';
 })
 export class ClienteMenuComponent {
   //comunicacion para la funcion que proviene de componentes padres
-  @Output() addCliente   = new EventEmitter<void>(); // cliente-list.component.ts
-  @Output() exportExcel  = new EventEmitter<void>(); // cliente-list.component.ts
-  @Output() exportPdf    = new EventEmitter<void>(); // cliente-list.component.ts
-  @Output() SubirArchivo = new EventEmitter<void>();
+  @Output() addOrEditCustomer      = new EventEmitter<void>(); // Emite al abrir el modal para añadir o editar un producto.
+  @Output() exportCustomerToExcel = new EventEmitter<void>(); // Emite para exportar datos a Excel.
+  @Output() exportCustomerToPdf   = new EventEmitter<void>(); // Emite para exportar datos a PDF.
+  @Output() uploadCustomerFile     = new EventEmitter<void>(); // Emite para iniciar la subida de un archivo.
+
 
   constructor(private router: Router) {}
 
-  onAddCliente() {
-    this.addCliente.emit();
+  onAddOrEditCustomer() {
+    this.addOrEditCustomer.emit(); // Abre el modal para añadir o editar un producto.
   }
 
-  exportAsExcel() {
-    this.exportExcel.emit();
+  exportCustomerToExcelFile() {
+    this.exportCustomerToExcel.emit(); // Exporta los datos a un archivo Excel.
   }
 
-  exportAsPdf() {
-    this.exportPdf.emit();
+  exportCustomeroPdfFile() {
+    this.exportCustomerToPdf.emit(); // Exporta los datos a un archivo PDF.
   }
 
-  subirAsArchivo() {
-    this.SubirArchivo.emit();
+  initiateFileUploadCustomer() {
+    this.uploadCustomerFile.emit(); // Inicia el proceso de subida de archivos.
   }
-
   navigate(route: string) {
     this.router.navigateByUrl(route);
   }

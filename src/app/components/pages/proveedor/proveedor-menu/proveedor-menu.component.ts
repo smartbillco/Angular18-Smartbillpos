@@ -7,31 +7,30 @@ import { Router } from '@angular/router';
   styleUrls: ['./proveedor-menu.component.css']
 })
 export class ProveedorMenuComponent {
-  //comunicacion para la funcion que proviene de componentes padres
-  @Output() addProduct   = new EventEmitter<void>(); // producto-add-edit.component.ts
-  @Output() exportExcel  = new EventEmitter<void>(); // producto-list.component.ts
-  @Output() exportPdf    = new EventEmitter<void>(); // producto-list.component.ts
-  @Output() SubirArchivo = new EventEmitter<void>();
+  @Output() addOrEditProveedor = new EventEmitter<void>(); // Emite al abrir el modal para añadir o editar un proveedor
+  @Output() exportProveedoresToExcel = new EventEmitter<void>(); // Emite para exportar datos de proveedores a un archivo Excel
+  @Output() exportProveedoresToPdf = new EventEmitter<void>(); // Emite para exportar datos de proveedores a un archivo PDF
+  @Output() uploadProveedorFile = new EventEmitter<void>(); // Emite para iniciar la subida de un archivo de proveedores
 
   constructor(private router: Router) {}
 
-  onAddProduct() {
-    this.addProduct.emit();
+  onAddOrEditProveedor() {
+    this.addOrEditProveedor.emit(); // Llama al evento para añadir o editar un proveedor
   }
 
-  exportAsExcel() {
-    this.exportExcel.emit();
+  ExportProveedoresToExcelFile() {
+    this.exportProveedoresToExcel.emit(); // Llama al evento para exportar proveedores a Excel
   }
 
-  exportAsPdf() {
-    this.exportPdf.emit();
+  ExportProveedoresToPdfFile() {
+    this.exportProveedoresToPdf.emit(); // Llama al evento para exportar proveedores a PDF
   }
 
-  subirAsArchivo() {
-    this.SubirArchivo.emit();
+  initiateFileUploadProveedores() {
+    this.uploadProveedorFile.emit(); // Llama al evento para subir un archivo de proveedores
   }
 
-  navigate(route: string) {
-    this.router.navigateByUrl(route);
+  navigateToRoute(route: string) {
+    this.router.navigateByUrl(route); // Navega a la ruta especificada
   }
 }

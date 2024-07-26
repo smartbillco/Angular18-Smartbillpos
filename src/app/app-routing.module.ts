@@ -5,11 +5,13 @@ import { MainComponent } from './components/html-struct/main-struct/main.compone
 import { HomeComponent } from './components/html-struct/home-content/home.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { PrincipalComponent } from './components/pages/principal/principal.component';
-import { CompanyInvoiceListComponent } from './components/pages/rendiciones/company-invoice-list/company-invoice-list.component';
+import { XmlElementXpathComponent } from './components/pages/rendiciones/xml-element-xpath/xml-element-xpath.component';
+import { BarcodeScannerComponent } from './components/complementos/barcode-scanner/barcode-scanner.component';
+import { DashboardAccountabilityComponent } from './components/pages/rendiciones/dashboard-accountability/dashboard-accountability.component';
 
 const routes: Routes = [
   { path: '', component: PrincipalComponent },
-  { path: 'rendiciones', component: CompanyInvoiceListComponent },
+  { path: 'dashboardAccountability', component: DashboardAccountabilityComponent },
   { path: 'login', component: LoginComponent },
   { 
     path: 'home', 
@@ -21,6 +23,10 @@ const routes: Routes = [
       { path: 'clientes', loadChildren: () => import('./components/pages/cliente/cliente.module').then(m => m.ClienteModule) },
       { path: 'categorias', loadChildren: () => import('./components/pages/categoria/categoria.module').then(m => m.CategoriaModule) },
       { path: 'productos', loadChildren: () => import('./components/pages/producto/producto.module').then(m => m.ProductoModule) },
+      { path: 'Xpath', component: XmlElementXpathComponent },
+      { path: 'scannerr', component: BarcodeScannerComponent },
+
+      
     ]
   },
   { path: '**', redirectTo: '' }

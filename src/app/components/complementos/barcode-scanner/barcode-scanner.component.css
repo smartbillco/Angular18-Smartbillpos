@@ -1,0 +1,15 @@
+/* barcode-scanner.component.css */
+video {
+    border: 1px solid black;
+  }
+
+  /* barcode-scanner.component.css */
+zxing-scanner {
+    width: 100%;
+    height: auto;
+  }
+  
+  p {
+    font-size: 18px;
+    color: #333;
+  }

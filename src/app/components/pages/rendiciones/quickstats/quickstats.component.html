@@ -1,0 +1,155 @@
+<div class="row quick-stats">
+  <!-- Card 1 -->
+  <div class="col-md-3 ">
+    <div class="quick-stats__item card card-background-white">
+      <div class="row">
+        <div class="col-6">
+          <small>TOTAL COMPRAS</small>
+          <h6>{{ totalFacturado | currency:'$ ':'symbol':'1.2-2' }}</h6>
+        </div>
+        <div class="col-6">
+          <div class="actions">
+            <mat-icon matBadge="{{ companiesOriginal.length }}" matTooltip="Contiene {{ companiesOriginal.length }} Facturas" matBadgeColor="accent">receipt</mat-icon>
+
+            <a  class="actions__item zmdi zmdi-trending-up" matTooltip="Exportar"></a>
+            <a class="actions__item zmdi zmdi-check-all"></a>
+            <div class="dropdown actions__item">
+              <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
+              <div class="dropdown-menu dropdown-menu-right">
+                <a (click)="exportCompaniesToExcel()" class="dropdown-item">Excel</a>
+                <a (click)="exportCompaniesToPdf()" class="dropdown-item">Pdf</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 minichar quick-stats__chart-container">
+          <app-invoice-total-chart
+            class="quick-stats__chart"
+            [height]="'100%'"
+            [width]="'100%'"
+            [companiesOriginal]="this.companiesOriginal"
+            [chartType]="'bar'"
+            (companiesOriginalChanged)="onCompaniesOriginalChanged($event)">
+           </app-invoice-total-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 2 -->
+  <div class="col-md-3 ">
+    <div class="quick-stats__item card card-background-white">
+      <div class="row">
+        <div class="col-6">
+          <small>FILTRO COMPRA</small>
+          <h6>{{ totalFacturadoFiltrado | currency:'$ ':'symbol':'1.2-2' }}</h6>
+        </div>
+        <div class="col-6">
+          <div class="actions">
+            <mat-icon matBadge="{{ companiesChart.length }}" matTooltip="Contiene {{ companiesChart.length }} Facturas" matBadgeColor="accent">receipt</mat-icon>
+
+            <a  class="actions__item zmdi zmdi-trending-up" matTooltip="Exportar"></a>
+            <a class="actions__item zmdi zmdi-check-all"></a>
+            <div class="dropdown actions__item">
+              <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
+              <div class="dropdown-menu dropdown-menu-right">
+                <a (click)="exportCompaniesFiltToExcel()" class="dropdown-item">Excel</a>
+                <a (click)="exportCompaniesFiltToPdf()" class="dropdown-item">Pdf</a>
+              </div>
+            
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 minichar quick-stats__chart-container">
+          <app-mini-chart
+            class="quick-stats__chart"
+            [height]="'100%'"
+            [width]="'100%'"
+            [companiesChart]="companiesChart"
+            [chartType]="'bar'"
+            (companiesChartChanged)="onCompaniesChartChanged($event)">
+          </app-mini-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 3 -->
+  <div class="col-md-3 ">
+    <div class="quick-stats__item card card-background-white">
+      <div class="row">
+        <div class="col-6">
+          <small>TOTAL IMPUESTOS</small>
+          <h6>{{ 0 | currency:'$ ':'symbol':'1.2-2' }}</h6>
+        </div>
+        <div class="col-6">
+          <div class="actions">
+            <a href="" class="actions__item zmdi zmdi-trending-up"></a>
+            <a href="" class="actions__item zmdi zmdi-check-all"></a>
+            <div class="dropdown actions__item">
+              <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
+              <div class="dropdown-menu dropdown-menu-right">
+                <a href="" class="dropdown-item">Refresh</a>
+                <a href="" class="dropdown-item">Manage Widgets</a>
+                <a href="" class="dropdown-item">Settings</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 minichar quick-stats__chart-container">
+          <app-mini-chart
+            class="quick-stats__chart"
+            [height]="'100%'"
+            [width]="'100%'"
+            [companiesChart]="companiesChart"
+            [chartType]="'doughnut'"
+            (companiesChartChanged)="onCompaniesChartChanged($event)">
+          </app-mini-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 4 -->
+  <div class="col-md-3 ">
+    <div class="quick-stats__item card card-background-white">
+      <div class="row">
+        <div class="col-6">
+          <small>TOTAL VENTAS</small>
+          <h6>{{ 0 | currency:'$ ':'symbol':'1.2-2' }}</h6>
+        </div>
+        <div class="col-6">
+          <div class="actions">
+            <a href="" class="actions__item zmdi zmdi-trending-up"></a>
+            <a href="" class="actions__item zmdi zmdi-check-all"></a>
+            <div class="dropdown actions__item">
+              <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
+              <div class="dropdown-menu dropdown-menu-right">
+                <a href="" class="dropdown-item">Refresh</a>
+                <a href="" class="dropdown-item">Manage Widgets</a>
+                <a href="" class="dropdown-item">Settings</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 minichar quick-stats__chart-container">
+          <app-mini-chart
+            class="quick-stats__chart"
+            [height]="'100%'"
+            [width]="'100%'"
+            [companiesChart]="companiesChart"
+            [chartType]="'line'"
+            (companiesChartChanged)="onCompaniesChartChanged($event)">
+          </app-mini-chart>
+        </div>
+      </div>
+    </div>
+  </div>

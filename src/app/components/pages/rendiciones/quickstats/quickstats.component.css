@@ -1,0 +1,153 @@
+/* Estilo general para los elementos de estadísticas */
+.quick-stats__item {
+    background-color: #007bff; /* Color de fondo azul */
+    color: #fff; /* Color del texto blanco */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+    display: flex; /* Diseño flexible */
+    align-items: center; /* Alineación vertical centrada */
+    justify-content: space-between; /* Espaciado entre elementos */
+  }
+  
+  .quick-stats__title {
+    font-size: 1.2em; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita */
+    margin-bottom: 10px; /* Espaciado inferior */
+  }
+  
+  .quick-stats__info {
+    display: flex; /* Diseño flexible */
+    flex-direction: column; /* Disposición en columna */
+    align-items: flex-start; /* Alineación horizontal a la izquierda */
+  }
+  
+  /*
+  .quick-stats__info h2 {
+    margin: 0; 
+    font-size: 24px; 
+    font-weight: bold;
+  }
+  */
+  
+  
+  .quick-stats__detail {
+    display: flex; /* Diseño flexible */
+    justify-content: space-between; /* Espaciado entre elementos */
+    margin-bottom: 10px; /* Espaciado inferior */
+  }
+  
+  .quick-stats__label {
+    font-weight: bold; /* Negrita */
+  }
+  
+  .quick-stats__value {
+    color: #e0e0e0; /* Color gris claro */
+  }
+  
+  .mini-chart-container {
+    display: flex; /* Diseño flexible */
+    justify-content: center; /* Centración horizontal */
+    align-items: center; /* Centración vertical */
+    background-color: transparent; /* Fondo transparente */
+  }
+  
+  .quick-stats__chart {
+    height: 50px; /* Altura del gráfico */
+    width: 100px; /* Ancho del gráfico */
+  }
+  
+  canvas {
+    display: block; /* Muestra como bloque */
+    width: 100% !important; /* Ancho completo */
+    height: 100% !important; /* Altura completa */
+  }
+  
+  
+  
+  
+  /*
+  .example-card {
+    max-width: 400px;
+    margin-bottom: 8px;
+  }*/
+  
+  .quick-stats__info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .quick-stats__text, .quick-stats__chart-container {
+    width: 50%;
+  }
+
+
+  .quick-stats__item .actions__item,
+  .quick-stats__item .actions__item .zmdi,
+  .quick-stats__text h6,
+  .quick-stats__text small {
+    color: rgb(0, 0, 0);
+  }
+
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+  }
+ /*
+  .actions-left,
+  .actions-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .actions-left {
+    justify-content: flex-start;
+  }
+  
+  .actions-right {
+    justify-content: flex-end;
+  }
+ */
+
+
+ .quick-stats__item {
+  background-color: #007bff; /* Color de fondo azul */
+  color: #000000f1; /* Color del texto blanco */
+  padding: 20px; /* Espaciado interno */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+.quick-stats__chart {
+  position: relative;
+  height:80px; /* Ajusta la altura del gráfico */
+  width: 250px; /* Asegura que el gráfico ocupe todo el ancho del contenedor */
+  /*
+  background-image: url('../../../../../assets/group_empty.jpg');
+  background-size: cover;
+  background-position: center;
+  */
+}
+
+.minichar {
+  display: flex; /* Diseño flexible */
+  justify-content: center; /* Centración horizontal */
+  align-items: center; /* Centración vertical */
+  background-color: transparent; /* Fondo transparente */
+}
+
+/*---------------------------------*/
+
+
+.quick-stats__chart {
+  position: relative;
+  z-index: 2; /* Asegura que el gráfico esté encima de la imagen de fondo */
+}
+
+.card-background-white {
+  background-color: white;
+}

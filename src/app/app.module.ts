@@ -24,15 +24,22 @@ import { LoginComponent } from './components/pages/login/login.component';
 import { ConfirmDialogComponent } from './components/complementos/confirm-dialog/confirm-dialog.component';
 import { BarcodeComponent } from './components/complementos/barcode/barcode.component';
 import { PrincipalComponent } from './components/pages/principal/principal.component';
-import { FileUploadModalComponent } from './components/pages/rendiciones/file-upload-modal/file-upload-modal.component';
 import { ConsolidatedViewComponent } from './components/pages/rendiciones/consolidated-view/consolidated-view.component';
 import { XmlElementXpathComponent } from './components/pages/rendiciones/xml-element-xpath/xml-element-xpath.component';
 import { ThemeSwitchComponent } from './components/complementos/theme-switch/theme-switch.component';
 import { ConfirmationService } from './services/utilidad/confirmation.service';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { CompanyInvoiceChartComponent } from './components/pages/rendiciones/company-invoice-chart/company-invoice-chart.component';
-import { CompanyInvoiceListComponent } from './components/pages/rendiciones/company-invoice-list/company-invoice-list.component';
+import { BarcodeScannerComponent } from './components/complementos/barcode-scanner/barcode-scanner.component';
 
+import { MiniChartComponent } from './components/pages/rendiciones/mini-chart/mini-chart.component';
+import { DashboardAccountabilityComponent } from './components/pages/rendiciones/dashboard-accountability/dashboard-accountability.component';
+import { FileUploadInvoiceComponent } from './components/pages/rendiciones/file-upload-invoice/file-upload-invoice.component';
+import { FilterInvoiceComponent } from './components/pages/rendiciones/filter-invoice/filter-invoice.component';
+import { HeaderComponent } from './components/pages/rendiciones/header/header.component';
+import { QuickstatsComponent } from './components/pages/rendiciones/quickstats/quickstats.component';
+import { InvoiceTotalChartComponent } from './components/pages/rendiciones/invoice-total-chart/invoice-total-chart.component';
+import { RendicionMenuComponent } from './components/pages/rendiciones/rendicion-menu/rendicion-menu.component';
 
 @NgModule({
   declarations: [
@@ -44,12 +51,19 @@ import { CompanyInvoiceListComponent } from './components/pages/rendiciones/comp
     ConfirmDialogComponent,
     BarcodeComponent,
     PrincipalComponent,
-    FileUploadModalComponent,
     ConsolidatedViewComponent,
     XmlElementXpathComponent,
     ThemeSwitchComponent,
-    CompanyInvoiceListComponent,
     CompanyInvoiceChartComponent,
+    BarcodeScannerComponent,
+    MiniChartComponent,
+    DashboardAccountabilityComponent,
+    FileUploadInvoiceComponent,
+    FilterInvoiceComponent,
+    HeaderComponent,
+    QuickstatsComponent,
+    InvoiceTotalChartComponent,
+    RendicionMenuComponent,
   ],
   imports: [
     BrowserModule,

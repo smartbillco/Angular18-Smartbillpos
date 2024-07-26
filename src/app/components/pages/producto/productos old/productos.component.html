@@ -1,0 +1,795 @@
+<div class="row">
+  <div class="col-md-4">
+    <header class="content__title">
+      <h1 class="h2 text-themecolor">PRODUCTOS</h1>
+    </header>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+
+    <div class="buttomheaderright">
+      <button class="btn btn-primary btn--icon-text" [disabled]='tipoUsuario != "1"'
+              (click)="openIngresarProductoModal()">
+        <i class="zmdi zmdi-file-plus zmdi-hc-fw"></i>
+        Ingresar producto
+      </button> &nbsp;
+
+      <button class="btn btn-primary btn--icon-text" data-toggle="modal" data-target="#modal-agregar-compra"
+              [disabled]='tipoUsuario != "1"' (click)="activeAddPurchase = true">
+        <i class="fas fa-cart-arrow-down"></i>
+        Registrar compra
+      </button> &nbsp;
+
+      <button class="btn btn-success btn--icon-text" data-toggle="modal" data-target="#modal-inputProducto"
+              [disabled]='tipoUsuario != "1"'>
+        <i class="zmdi zmdi-upload zmdi-hc-fw"></i>
+        Cargar Archivo
+      </button>&nbsp;
+
+
+      <button class="btn btn-success btn--icon-text" (click)='exportProductListToExcel()' [disabled]='tipoUsuario != "1"'>
+        <i class="fas fa-file-export"></i> Exportar excel
+      </button>
+      &nbsp;
+      <button class="btn btn-success btn--icon-text" (click)='exportProductListToPdf()'  data-toggle="modal">
+          <i class="fa fa-file-pdf-o"></i> Pdf
+      </button>
+      <br>
+    </div>
+
+
+    <div class="row mt-3">
+      <div class="form-group col-6">
+        <select class="browser-default custom-select">
+          <option value="0">Filtro por categoria</option>
+          <option *ngFor="let categoria of listaCategoria" value="{{categoria.idCategoriaProducto}}"
+                  (click)="filtrarPorCategoria(categoria)">
+            {{categoria.nombre }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table id="dt-producto" class="table table-bordered" style="width: 100%">
+        <thead class="thead-default">
+        <tr>
+          <th class="td-option">Código</th>
+          <th class="td-option">Nombre</th>
+          <th class="td-option">Categoría</th>
+          <th class="td-option">Inventario</th>
+          <th class="td-option">Precio de compra</th>
+          <th class="td-option">Precio de venta</th>
+          <td class="td-option">Opciones</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor='let prod of listaProductos'>
+          <td title="Codigo de producto" class="anchoColumnaCodigo text-center"><span class="badge"
+                                                                                      [ngClass]="getColorStock(prod.inventario)">{{prod.codigo}}</span>
+          </td>
+          <td class="productSelected" (click)='verDetalles(prod)' data-toggle="tooltip"
+              title="Ver Detalles {{prod.nombre}} ">
+            {{prod.nombre}}
+          </td>
+          <td class="text-center">{{prod.categoria}}</td>
+          <td class="text-center">{{prod.inventario}}</td>
+
+          <td>{{prod.costo | currency:'USD'}}</td>
+          <td>{{prod.precio | currency:'USD'}}</td>
+          <td class="tableoption anchoColumnaOpciones">
+
+            <button type="button" class="btn btn-outline-success" (click)="setProductoMovimiento(prod)"
+                    [disabled]="tipoUsuario != 1 || prod.tipoNegocio == 1" title="registrar movimiento"
+                    data-title="New" data-toggle="modal" data-target="#modal-agregarMovimiento">
+              <i class="fas fa-plus"></i>
+            </button> &nbsp;
+            <button type="button" class="btn btn-outline-primary" (click)="setActualizarProducto(prod)"
+                    [disabled]='tipoUsuario != 1' title="Editar" data-title="Edit" data-toggle="modal"
+                    data-target="#modal-editarproducto">
+              <i class="fas fa-cog"></i>
+            </button> &nbsp;
+            <button type="button" class="btn btn-outline-danger" (click)="eliminarProducto(prod)"
+                    [disabled]='tipoUsuario != 1' title="Eliminar" data-title="Delete" data-toggle="modal"
+                    data-target="#delete">
+              <i class="far fa-trash-alt"></i>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <br><br>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-md-3">
+        <span class="badge badge-primary small-text">Más de 100 Unidades en Stock</span>
+      </div>
+      <div class="col-12 col-md-3">
+        <span class="badge badge-success small-text">Menos de 100 Unidades en Stock</span>
+      </div>
+      <div class="col-12 col-md-3">
+        <span class="badge badge-warning small-text">Menos de 50 Unidades en Stock</span>
+      </div>
+      <div class="col-12 col-md-3">
+        <span class="badge badge-danger small-text">Menos de 20 Unidades en Stock</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal crear producto -->
+<div class="modal fade" id="modal-producto" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <header class="price-table__header bg-blue ">
+        <div class="row">
+          <div class="price-table__title col-10"> Agregar producto</div>
+          <div class="col-2">
+            <button class="btn btn-info btn--icon float-right" type="reset" data-dismiss="modal">
+              <i class="zmdi zmdi-close"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+      <form #formProductos='ngForm' (ngSubmit)='crearProducto(formProductos)' novalidate>
+        <div class="modal-body">
+          <div class="row">
+
+            <div class="col-sm-3">
+              <div class="form-group"
+                   [ngClass]="{'invalid': (prodId?.errors?.required || prodId?.errors?.minlength) && prodId.touched} ">
+                <label>Código</label>
+                <input [(ngModel)]='producto.codigo' type="text" class="form-control" maxlength="7"
+                       minlength="2" required name="prodId" #prodId="ngModel">
+                <i class="form-group__bar"></i>
+
+              </div>
+              <div class="litle-text" *ngIf="prodId.touched">
+                <span *ngIf="prodId?.errors?.required">El codigo es requerido</span>
+                <span *ngIf="prodId?.errors?.minlength">Se requieren minimo 2 caracteres</span>
+                <span *ngIf="prodId?.errors?.maxlength">Solo se permiten 7 caracteres como maximo</span>
+              </div>
+            </div>
+            <div class="col-sm-9">
+              <div class="form-group"
+                   [ngClass]="{'invalid': (prodNombre?.errors?.required || prodNombre?.errors?.minlength) && prodNombre.touched}">
+                <label>Nombre</label>
+                <input name="prodNombre" [(ngModel)]='producto.nombre' type="text" class="form-control"
+                       minlength="4" maxlength="45" required #prodNombre="ngModel">
+                <i class="form-group__bar"></i>
+              </div>
+              <div class="litle-text" *ngIf="prodNombre.touched">
+                <span *ngIf="prodNombre?.errors?.required">El nombre es requerido</span>
+                <span *ngIf="prodNombre?.errors?.minlength">Se requieren minimo 4 caracteres</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <div class="form-group">
+                <div class="select"
+                     [ngClass]="{'invalid': (prodCate?.errors?.required) && prodCate.touched}">
+                  <label>Categoría</label>
+                  <select [(ngModel)]='producto.idCategoria' class="form-control" name="prodCate"
+                          #prodCate="ngModel" required>
+                    <option [ngValue]='cat.idCategoriaProducto' *ngFor='let cat of listaCategoria'>
+                      {{cat.nombre}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <div class="select">
+                  <label>Proveedor</label>
+                  <select [(ngModel)]='producto.idProveedor' class="form-control" name="prodProv"
+                          #prodProv="ngModel">
+                    <option [ngValue]='prov.idProveedor' *ngFor='let prov of listaProveedores'>
+                      {{prov.nombre}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group"
+                   [ngClass]="{'invalid': (prodPrecioCompra?.errors?.required) && prodPrecioCompra.touched}">
+                <label>Precio de compra</label>
+                <input [(ngModel)]='producto.costo' type="number" class="form-control" minlength="2"
+                       step="0.01" max="999999.99" pattern="[0-9]{5}" required name="prodPrecioCompra"
+                       #prodPrecioCompra="ngModel">
+              </div>
+
+              <div class="litle-text" *ngIf="prodPrecioCompra.touched">
+                <span *ngIf="prodPrecioCompra?.errors?.required">Debe añadir un precio de compra </span>
+                <span *ngIf="prodPrecioCompra?.errors?.minlength">Se requieren minimo 2
+                                    caracteres</span>
+              </div>
+
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group"
+                   [ngClass]="{'invalid': (prodPrecioVenta?.errors?.required) && prodPrecioVenta.touched}">
+                <label>Precio de venta</label>
+                <input [(ngModel)]='producto.precio' type="number" class="form-control" minlength="2"
+                       step="0.01" max="999999.99" required name="prodPrecioVenta"
+                       #prodPrecioVenta="ngModel">
+
+                <i class="form-group__bar"></i>
+
+              </div>
+              <div class="litle-text" *ngIf="prodPrecioVenta.touched">
+                <span *ngIf="prodPrecioVenta?.errors?.required">Debe añadir un precio de venta</span>
+                <span *ngIf="prodPrecioVenta?.errors?.minlength">Se requieren minimo 2 caracteres</span>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group"
+                   [ngClass]="{'invalid': (prodMinPrice?.errors?.minlength) && prodMinPrice.touched}">
+                <label>Precio mínimo de venta</label>
+                <input [(ngModel)]='producto.precioMinimo' type="text" class="form-control"
+                       minlength="2" maxlength="10" pattern="^(0|[1-9][0-9]*)$" name="prodMinPrice"
+                       #prodMinPrice="ngModel">
+
+                <i class="form-group__bar"></i>
+              </div>
+              <div class="litle-text" *ngIf="prodMinPrice.touched">
+                <span *ngIf="prodMinPrice?.errors?.minlength">Se requieren minimo 2 caracteres</span>
+              </div>
+            </div>
+            <div class="col-sm-4" *ngIf='producto.tipoNegocio != 1'>
+              <div class="form-group"
+                   [ngClass]="{'invalid': (prodInv?.errors?.required) && prodInv.touched}">
+                <label>Inventario</label>
+                <input [(ngModel)]='producto.inventario' type="text" class="form-control" minlength="1"
+                       maxlength="4" pattern="^(0|[1-9][0-9]*)$" required name="prodInv"
+                       #prodInv="ngModel">
+
+                <i class="form-group__bar"></i>
+
+              </div>
+
+              <div class="litle-text" *ngIf="prodInv.touched">
+                <span *ngIf="prodInv?.errors?.minlength">Se requieren minimo 1 caracteres</span>
+                <span *ngIf="prodInv?.errors?.required"> Debe ingresar una catidaf en inventrio </span>
+              </div>
+
+            </div>
+            <div class="col-sm-4" *ngIf='producto.tipoNegocio != 1'>
+              <div class="form-group">
+                <label>Stock mínimo</label>
+                <input [(ngModel)]='producto.minStock' type="text" class="form-control" minlength="1"
+                       maxlength="6" pattern="^(0|[1-9][0-9]*)$" required name="prodMinS">
+                <i class="form-group__bar"></i>
+              </div>
+            </div>
+            <div class="col-sm-4" *ngIf='producto.tipoNegocio != 1'>
+              <div class="form-group">
+                <label>Stock máximo</label>
+                <input [(ngModel)]='producto.maxStock' type="text" class="form-control" minlength="1"
+                       maxlength="8" pattern="^(0|[1-9][0-9]*)$" required name="prodMaxS">
+                <i class="form-group__bar"></i>
+              </div>
+            </div>
+
+            <div *ngIf='producto.tipoNegocio == 1' class="form-group">
+              <label>Impuesto al consumo 8%</label>
+              <select [(ngModel)]='producto.impoConsumo' class="form-control" name="prodImpo">
+                <option [ngValue]='1'>Sí</option>
+                <option [ngValue]='0'>No</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <div class="select">
+                  <label>Unidad de Medida</label>
+                  <select [(ngModel)]='producto.idUnidadMedida' class="form-control"
+                          name="unidadNegocio" #unidadNegocio="ngModel" required>
+                    <option [ngValue]='t.id' *ngFor='let t of listaUnidadesMedida'>
+                      {{t.nombre}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6" *ngIf='producto.tipoNegocio != 1'>
+              <div class="form-group">
+                <label>Código de Barras</label>
+                <input [(ngModel)]='producto.codigoBarras' type="text" class="form-control"
+                       minlength="3" required name="prodBarCode" maxlength="100">
+                <i class="form-group__bar"></i>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Descripción</label>
+            <input [(ngModel)]='producto.descripcion' type="text" class="form-control" minlength="3"
+                   required name="prodBarCode" maxlength="100">
+            <i class="form-group__bar"></i>
+          </div>
+          <div class="form-group">
+            <p>Imagen del producto (Tamaño máximo 1M)</p>
+            <span style="color:red;" *ngIf="imgMessage">{{imgMessage}}</span>
+            <input #file type="file" accept='image/*' (change)="preview($event.target.files)"/>
+            <img [src]="imgURL" height="200" *ngIf="imgURL">
+          </div>
+          <div class="form-group" *ngIf='producto.tipoNegocio == 1'>
+            <br/>
+            <h4 class="card-title">Receta del Producto</h4>
+
+            <form #formInsuumoProd='ngForm' (ngSubmit)="addInsumo()">
+              <div class="row">
+                <div class="col-sm-8">
+                  <div class="form-group">
+                    <div class="select">
+                      <label>Insumo</label>
+                      <select [(ngModel)]='insumoProducto' class="form-control"
+                              name="recetaInsumo" required (change)="setInsumoReceta()">
+                        <option [ngValue]='insumo' *ngFor='let insumo of listaInsumos'>
+                          {{insumo.nombre}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <label>Cantidad</label>
+                    <input [(ngModel)]='receta.cantidad' type="text" class="form-control"
+                           minlength="1" maxlength="4" pattern="[0-9]+([,\.][0-9]+)?" required
+                           name="recetaInsumoCant">
+                    <i class="form-group__bar"></i>
+                  </div>
+                </div>
+                <div class="col-sm-1">
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-success btn--icon" title="Agregar Insumo">
+                      <i class="zmdi zmdi-plus zmdi-hc-fw"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <!-- Tabla Insumos de receta -->
+            <div style="margin-bottom: -1%">
+              <div class="table-responsive">
+                <table id="dt-proveedor" class="table table-bordered">
+                  <thead class="thead-default">
+                  <tr class="text-center">
+                    <td>Insumo</td>
+                    <td>Cant.</td>
+                    <td>Acción</td>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr style="text-transform:uppercase; font-size: 14px"
+                      *ngFor="let detInsumo of producto.listRecetas">
+                    <td style="text-align: left; width:70%">{{detInsumo.Insumo}}</td>
+                    <td class="text-center vertical-center" style="width:20%">
+                      {{detInsumo.cantidad}}
+                      <!--input [(ngModel)]='detInsumo.cantidad' type="number" class="form-control" name="cantInsumoDet"-->
+                    </td>
+                    <td style="text-align: center; width:10%">
+                      <button class="btn btn-danger btn--icon btnaccion" type="button"
+                              (click)="borrarInsumo(detInsumo)" data-title="Eliminar">
+                        <i class="zmdi zmdi-delete zmdi-hc-fw"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer modalMargenInferior">
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-success" [disabled]="prodId.invalid || prodPrecioVenta.invalid ||
+                                prodNombre.invalid ||
+                                prodCate.invalid  ">
+              <i class="fas fa-plus"></i> Agregar Producto
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Termina modal crear producto -->
+
+<!-- Modal  Editar producto -->
+<div class="modal fade" id="modal-editarproducto" tabindex="-1" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <header class="price-table__header bg-blue ">
+        <div class="row">
+          <div *ngIf="productoActualizar.tipoNegocio === 0" class="price-table__title col-10">Editar Producto
+            - {{ productoActualizar.nombre }} </div>
+          <div *ngIf="productoActualizar.tipoNegocio === 1" class="price-table__title col-10">Editar Receta -
+            {{ productoActualizar.nombre }} </div>
+          <div class="col-2">
+            <button (click)='cerrarModalEditar()' class="btn btn-info btn--icon float-right"
+                    data-dismiss="modal">
+              <i class="zmdi zmdi-close"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+      <form #formeditarProductos='ngForm' (ngSubmit)='editarProducto()'>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Código</label>
+            <input [(ngModel)]='productoActualizar.codigo' maxlength="7" minlength="2" readonly type="text"
+                   class="form-control" required name="prodEditId">
+            <i class="form-group__bar"></i>
+          </div>
+          <div class="form-group">
+            <label>Nombre</label>
+            <input [(ngModel)]='productoActualizar.nombre' minlength="2" maxlength="45" type="text"
+                   class="form-control" required name="prodEditNombre">
+            <i class="form-group__bar"></i>
+          </div>
+          <div class="form-group">
+            <div class="select">
+              <label>Categoría</label>
+              <select [(ngModel)]='productoActualizar.idCategoria' class="form-control"
+                      name="prodEditCategoria">
+                <option *ngFor='let cat of listaCategoria' [ngValue]="cat.idCategoriaProducto">
+                  {{cat.nombre}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group" *ngIf="productoActualizar.tipoNegocio === 0">
+            <div class="select">
+              <label>Proveedor</label>
+              <select [(ngModel)]='productoActualizar.idProveedor' class="form-control"
+                      name="prodEditProv">
+                <option disabled selected>Proveedor</option>
+                <option [ngValue]="prov.idProveedor" *ngFor='let prov of listaProveedores'>
+                  {{prov.nombre}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Precio de compra</label>
+                <input [(ngModel)]='productoActualizar.costo' minlength="2" type="number" step="0.01"
+                       max="999999.99" class="form-control" required name="prodEditPrecioCompra">
+                <i class="form-group__bar"></i>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Precio de venta</label>
+                <input [(ngModel)]='productoActualizar.precio' minlength="2" type="number" step="0.01"
+                       max="999999.99" class="form-control" required name="prodEditPrecioVenta">
+                <i class="form-group__bar"></i>
+              </div>
+            </div>
+          </div>
+          <div class="form-group" *ngIf="productoActualizar.tipoNegocio === 0">
+            <label>Código de Barras</label>
+            <input [(ngModel)]='productoActualizar.codigoBarra' type="text" minlength="3"
+                   class="form-control" required name="prodEditBarCode" maxlength="100">
+            <i class="form-group__bar"></i>
+          </div>
+          <div class="form-group">
+            <p>Imagen del producto (Tamaño máximo 1M)</p>
+            <span style="color:red;" *ngIf="imgMessage">{{imgMessage}}</span>
+            <input #file type="file" accept='image/*' (change)="previewEditProducto(file.files)"
+                   name="imgEditPro"/>
+            <img [src]="imgURL" height="200" *ngIf="imgURL">
+          </div>
+          <div class="modal-footer modalMargenInferior">
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal"
+                    (click)='cerrarModalEditar()'>Cancelar
+            </button>
+            <button type="submit" class="btn btn-success">Editar Producto</button>
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Termina modal de editar producto -->
+
+<div class="modal fade" id="modal-detalleproducto" tabindex="-1" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <header class="price-table__header bg-blue">
+        <!-- <div class="price-table__title">Detalle Producto</div> -->
+        <div class="row">
+          <div class="price-table__title col-10"> Detalle producto {{ productoDetalle.nombre }} </div>
+          <div class="col-2">
+            <button class="btn btn-info btn--icon float-right" type="reset" data-dismiss="modal">
+              <i class="zmdi zmdi-close"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+      <div class="modal-body">
+        <div class="form-group">
+          <div class="row">
+            <!-- <div class="col-12 col-md-6">
+    <p>Código: <b class="productSelected" >{{productoDetalle.codigo}}</b></p>
+    <p>Nombre: <b>{{productoDetalle.nombre}}</b></p>
+    <p>Precio de compra: <b>{{productoDetalle.costo | currency:'USD' }}</b></p>
+    <p>Precio de venta: <b> {{productoDetalle.precio | currency:'USD'}}</b></p>
+    <p>Categoría: <b>{{productoDetalle.categoria}}</b></p>
+    <p>Proveedor: <b>{{productoDetalle.proveedor}}</b></p>
+    <p>Inventario: <b>{{productoDetalle.inventario}}</b> unidades disponibles</p>
+</div>
+<div class="col-12 col-md-6">
+
+</div> -->
+
+            <div class="col-123 col-md-6">
+              <table class="table table-bordered">
+                <thead>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>Codigo</td>
+                  <th scope="row"> {{ productoDetalle.codigo }} </th>
+                </tr>
+                <tr>
+                  <td>Nombre</td>
+                  <th scope="row"> {{ productoDetalle.nombre }} </th>
+                </tr>
+                <tr>
+                  <td>Precio de compra</td>
+                  <th scope="row"> {{productoDetalle.costo | currency:'USD' }} </th>
+                </tr>
+                <tr>
+                  <td>Precio de venta</td>
+                  <th scope="row"> {{productoDetalle.precio | currency:'USD'}} </th>
+                </tr>
+                <tr>
+                  <td>Categoría</td>
+                  <th scope="row"> {{productoDetalle.categoria}} </th>
+                </tr>
+                <tr>
+                  <td>Proveedor</td>
+                  <th scope="row"> {{productoDetalle.proveedor}} </th>
+                </tr>
+                <tr>
+                  <td>Inventario</td>
+                  <th scope="row"> {{productoDetalle.inventario}} </th>
+                </tr>
+
+
+                </tbody>
+              </table>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="productDetail__img">
+                <img [src]="productoDetalle.foto ? productoDetalle.foto :  'assets/logo.png'"
+                     height="200" width="250">
+              </div>
+
+            </div>
+
+          </div>
+          <!-- <div class="modal-footer modalMargenInferior">
+
+  <button type="button" class="btn btn-success" data-dismiss="modal"
+    (click)='cerrarModalEditar()'>Cerrar</button>
+</div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal cargar lista de productos -->
+<div class="modal fade" id="modal-inputProducto" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <header class="price-table__header bg-blue">
+        <div class="price-table__title">Carga de productos</div>
+      </header>
+
+      <div class="modal-body">
+        <div class="form-group">
+          <div class="estiloinputfile">
+            <p class="subir">Seleccionar archivo</p>
+            <input type="file" size="20" (change)="onFileAdded($event.target.files)" name="fileProductos"
+                   class="form-control" accept=".csv" id="upfileprod">
+            <!--i class="form-group__bar"></i-->
+          </div>
+          <p>{{nombreArchivo}}</p>
+        </div>
+        <div class="modal-footer modalMargenInferior">
+          <button type="button" (click)='subirArchivo()' data-dismiss="modal"
+                  class="btn btn-primary">Aceptar
+          </button>
+          <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal Compra-->
+<div *ngIf="activeAddPurchase" class="modal fade" id="modal-registrar-factura-proveedorrrr" tabindex="-1"
+     data-keyboard="false">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <!-- <header class="price-table__header bg-blue">
+  <div class="price-table__title">Registrar nueva factura proveedor</div>
+</header> -->
+      <header class="price-table__header bg-blue ">
+        <div class="row">
+          <div class="price-table__title col-12 col-md-10">Registrar nueva factura proveedor</div>
+          <div class="col-2">
+            <button class="btn btn-info btn--icon float-right" data-dismiss="modal">
+              <i class="zmdi zmdi-close"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+      <app-nueva-compra [productList]="listaProductos" [providersList]="listaProveedores">
+      </app-nueva-compra>
+
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-agregarMovimiento" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <header class="price-table__header bg-blue">
+        <div class="price-table__title">Registrar Movimiento</div>
+      </header>
+      <form #formProductos='ngForm' (ngSubmit)='nuevoMovimiento()'>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Tipo de Movimiento</label>
+            <select class="form-control form-control-lg" name="CajTipMovim" (change)='setConceptos()'
+                    [(ngModel)]='movimientoinventario.tipo'>
+              <option *ngFor='let r of listTipoMovimiento' [(ngValue)]='r.valor'>{{r.nombre}}</option>
+            </select>
+            <i class="form-group__bar"></i>
+          </div>
+          <div class="form-group">
+            <label>Concepto</label>
+            <select class="form-control form-control-lg" name="EditEmp"
+                    [(ngModel)]='movimientoinventario.concepto'>
+              <option *ngFor='let r of listConceptos' [(ngValue)]='r'>{{r}}</option>
+            </select>
+            <i class="form-group__bar"></i>
+          </div>
+          <div class="col-sm-9">
+            <div class="form-group">
+              <label>Cantidad</label>
+              <input class="form-control form-control-lg" type="number" name="valNuevoMov"
+                     [(ngModel)]='movimientoinventario.cantidad'>
+              <i class="form-group__bar"></i>
+            </div>
+          </div>
+          <div class="col-sm-9">
+            <div class="form-group">
+              <label>Observación</label>
+              <input class="form-control form-control-lg" type="text" name="obsNuevoMov" maxlength="80"
+                     [(ngModel)]='movimientoinventario.observacion'>
+              <i class="form-group__bar"></i>
+            </div>
+          </div>
+          <div class="modal-footer modalMargenInferior">
+            <button type="submit" class="btn btn-primary">Registrar Movimiento</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!--Agregar Compra-->
+<div class="modal fade" id="modal-agregar-compra" tabindex="-1" data-keyboard="false">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <header class="price-table__header bg-blue">
+        <div class="row">
+          <div class="price-table__title col-12 col-md-10">Registrar compra de productos</div>
+          <div class="col-2">
+            <button class="btn btn-info btn--icon float-right" data-dismiss="modal">
+              <i class="zmdi zmdi-close"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+      <app-nueva-compra></app-nueva-compra>
+
+      <!---div class="modal-body">
+
+    <div class="row">
+
+      <div class="col">
+        <div class="form-group">
+          <label>Total</label>
+          <input [(ngModel)]='facturaProveedor.valor' minlength="2" type="number"
+            class="form-control form-control-lg" required name="facTotalValor">
+          <i class="form-group__bar"></i>
+        </div>
+      </div>
+    </div>
+
+    <form #formNuevaCompra='ngForm'  (ngSubmit)='addProductoFactura()'>
+
+      <div class="form-group">
+        <label>Producto</label>
+        <select [(ngModel)]='compra.idProducto' class="form-control" name="factProdNom"
+          (change)='setProductoCompra()'>
+          <option [ngValue]='prod.idProducto' *ngFor='let prod of listaProductos'>
+            {{prod.nombre}}</option>
+        </select>
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Cantidad</label>
+            <input [(ngModel)]='compra.cantidad' minlength="2" type="number" class="form-control form-control-lg"
+              required name="compraCantidad">
+            <i class="form-group__bar"></i>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-success btn--icon" title="Agregar Permiso">
+        <i class="zmdi zmdi-plus zmdi-hc-fw"></i>
+      </button>
+    </form>
+    <div class="table-responsive">
+      <table id="dt-compras-factura" class="table table-bordered" style="width: 100%">
+        <thead class="thead-default">
+          <tr>
+            <th class="td-option">Nombre</th>
+            <th class="td-option">Unidad</th>
+            <th class="td-option">Cantidad</th>
+            <td class="td-option">Opciones</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let compra of facturaProveedor.listaCompras'>
+            <td>{{compra.producto}}</td>
+            <td>{{compra.medida}}</td>
+            <td>{{compra.cantidad}}</td>
+
+            <td class="tableoption anchoColumnaOpciones">
+              <button (click)='eliminarProductoCompra(compra)' class="btn btn-danger btn--icon"
+                data-title="Delete" [disabled]='tipoUsuario != 1' title="Eliminar" data-toggle="modal"
+                data-target="#delete">
+                <i class="zmdi zmdi-delete zmdi-hc-fw"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br><br>
+    </div>
+
+    <div class="modal-footer modalMargenInferior">
+      <button type="submit" class="btn btn-primary">Aceptar</button>
+      <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+    </div>
+  </div-->
+    </div>
+  </div>
+</div>
+
+<app-add-provider-invoice *ngIf="activeAddInvoice" [listaProductos]="listaProductos"
+                          [listaProveedores]="listaProveedores">
+</app-add-provider-invoice>

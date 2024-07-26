@@ -1,0 +1,43 @@
+<app-header-inv ></app-header-inv>
+
+<section class="content content--full">
+  <div class="content__inner"> 
+
+    <app-quickstats
+     [totalFacturado]="totalFacturado" 
+     [totalFacturadoFiltrado]="totalFacturadoFiltrado"
+     [companiesChart]="companiesChart"
+     [companiesOriginal]="companiesOriginal">
+    </app-quickstats>
+
+  
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+
+            <app-file-upload-invoice 
+              (companiesOriginalChanged)="onCompaniesOriginalChanged($event)"
+              (companiesChartChanged)="onCompaniesChartChanged($event)" 
+              (totalFacturadoChanged)="onTotalFacturadoChanged($event)"
+              (totalFacturadoFiltradoChanged)="onTotalFacturadoFiltradoChanged($event)">
+            </app-file-upload-invoice>
+            
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <app-company-invoice-chart
+              [companiesChart]="companiesChart"
+              [chartType]="'bar'"
+              (companiesChartChanged)="onCompaniesChartChanged($event)">
+            </app-company-invoice-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

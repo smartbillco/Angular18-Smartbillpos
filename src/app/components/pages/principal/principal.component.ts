@@ -1,13 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ScriptLoaderService } from '../../../services/utilidad/script-loader.service';
+import { Company } from '../rendiciones/file-upload-invoice/file-upload-invoice.component';
 
 @Component({
   selector: 'app-principal',
   templateUrl: './principal.component.html',
   styleUrls: ['./principal.component.css']
 })
-export class PrincipalComponent {
+export class PrincipalComponent implements OnInit {
+  companiesChart: Company[] = [];
+
   constructor(
     public dialog: MatDialog,
     private scriptLoader: ScriptLoaderService
@@ -38,25 +41,20 @@ export class PrincipalComponent {
     this.scriptLoader.loadAssets(assets);
   }
 
+
   openRendicionFinanciera(): void {
- 
     const hostname = window.location.hostname;
     let baseUrl = '';
 
     if (hostname === 'localhost' || hostname === '127.0.0.1') {
-      // Entorno local
-      baseUrl = `${window.location.origin}/#/rendiciones`;
+      baseUrl = `${window.location.origin}/#/dashboardAccountability`;
     } else {
-      // Entorno de producción
       const currentUrl = window.location.href;
       const basePath = currentUrl.substring(0, currentUrl.lastIndexOf('/') + 1);
-      baseUrl = `${basePath}#/rendiciones`;
+      baseUrl = `${basePath}/dashboardAccountability`;
     }
 
     console.log('Opening URL:', baseUrl);
     window.open(baseUrl, '_blank');
-
   }
-
-
 }

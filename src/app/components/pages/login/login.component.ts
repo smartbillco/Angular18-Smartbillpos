@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('idEmpresa', String(this.usuario.empresa.id));
         localStorage.setItem('nit', String(this.usuario.empresa.nit));
 
-        this.toastr.success('Hola, has iniciado sesión exitosamente', 'Bienvenido');
+        this.toastr.success('Hola, ' + this.usuario.email + ' has iniciado sesión exitosamente', 'Bienvenido');
         this.router.navigate(['/home']);
       } else {
         this.toastr.error('Usuario y/o contraseña inválidos', 'Login');

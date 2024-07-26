@@ -1,11 +1,3 @@
-/*
-  //comunicacion para la funcion que proviene de componentes padres
-  @Output() addProduct = new EventEmitter<void>(); // producto-add-edit.component.ts
-  @Output() exportExcel  = new EventEmitter<void>(); // producto-list.component.ts
-  @Output() exportPdf    = new EventEmitter<void>(); // producto-list.component.ts
-  @Output() subirArchivo = new EventEmitter<void>();
-*/
-
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -16,27 +8,28 @@ import { Router } from '@angular/router';
 })
 export class CategoriaMenuComponent {
   //comunicacion para la funcion que proviene de componentes padres
-  @Output() addProduct   = new EventEmitter<void>(); // producto-add-edit.component.ts
-  @Output() exportExcel  = new EventEmitter<void>(); // producto-list.component.ts
-  @Output() exportPdf    = new EventEmitter<void>(); // producto-list.component.ts
-  @Output() SubirArchivo = new EventEmitter<void>();
+  @Output() addOrEditCategory     = new EventEmitter<void>(); // Emite al abrir el modal para añadir o editar un producto.
+  @Output() exportCategoryToExcel = new EventEmitter<void>(); // Emite para exportar datos a Excel.
+  @Output() exportCategoryToPdf   = new EventEmitter<void>(); // Emite para exportar datos a PDF.
+  @Output() uploadCategoryFile    = new EventEmitter<void>(); // Emite para iniciar la subida de un archivo.
+
 
   constructor(private router: Router) {}
 
-  onAddProduct() {
-    this.addProduct.emit();
+  onAddOrEditCategory() {
+    this.addOrEditCategory.emit(); // Abre el modal para añadir o editar un producto.
   }
 
-  exportAsExcel() {
-    this.exportExcel.emit();
+  exportCategoryToExcelFile() {
+    this.exportCategoryToExcel.emit(); // Exporta los datos a un archivo Excel.
   }
 
-  exportAsPdf() {
-    this.exportPdf.emit();
+  exportCategoryToPdfFile() {
+    this.exportCategoryToPdf.emit(); // Exporta los datos a un archivo PDF.
   }
 
-  subirAsArchivo() {
-    this.SubirArchivo.emit();
+  initiateFileUploadCategory() {
+    this.uploadCategoryFile.emit(); // Inicia el proceso de subida de archivos.
   }
 
   navigate(route: string) {

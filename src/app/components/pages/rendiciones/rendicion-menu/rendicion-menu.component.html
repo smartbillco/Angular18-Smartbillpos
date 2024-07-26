@@ -1,0 +1,41 @@
+<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+  <mat-icon >dialpad</mat-icon>
+</button>
+
+<mat-menu #menu="matMenu">
+
+  <button mat-menu-item (click)="onAddOrEditProduct()">    <mat-icon>add_circle</mat-icon> <span>Nuevo Producto</span> </button>
+  <button mat-menu-item [matMenuTriggerFor]="menuCompras"> <mat-icon>shopping_cart_checkout</mat-icon>Compras y devolucion</button> 
+  <button mat-menu-item [matMenuTriggerFor]="menuExport">  <mat-icon>upgrade</mat-icon>Exportar</button>  
+  
+  <!--
+  <a  mat-menu-item (click)="initiateFileUploadProducts()"  class="actions__item zmdi zmdi-trending-up" matTooltip="Exportar"></a>
+  -->
+  <button mat-menu-item (click)="initiateFileUploadProducts()">
+    <mat-icon>cloud_upload</mat-icon>
+    <span>Cargar archivo con productos</span>
+  </button>
+  
+</mat-menu>
+
+<mat-menu #menuCompras="matMenu">
+  <button mat-menu-item>
+    <mat-icon>add_shopping_cart</mat-icon>
+    <span>Nueva Compra</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>remove_shopping_cart</mat-icon>
+    <span>Devolucion</span>
+  </button>
+</mat-menu>
+
+<mat-menu #menuExport="matMenu" >
+  <button mat-menu-item  (click)="exportProductsToExcelFile()">
+    <mat-icon>insert_drive_file</mat-icon>
+    <span>Excel</span>
+  </button>
+  <button mat-menu-item  (click)="exportProductsToPdfFile()">
+    <mat-icon>picture_as_pdf</mat-icon>
+    <span>PDF</span>
+  </button>
+</mat-menu>

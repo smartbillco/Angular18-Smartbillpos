@@ -4,37 +4,29 @@ import {Receta} from './receta';
 
 export class Producto {
 
-  "codigoBarra": string;
   "idProducto": number;
   "idCategoria": number;
   "idProveedor": number;
   "idEmpresa": number;
-  "idUnidadMedida": number;
-  "tipoNegocio": number;
-  "codigo": string;
-  "nombre": string;
-  "descripcion": string;
   "costo": number;
-  "precio": number;
-  "codigoBarras": string;
-  "fechaRegistro": Date;
   "inventario": number;
   "minStock": number;
   "maxStock": number;
   "precioMinimo": number;
-  "impoConsumo": number;
+  "idUnidadMedida": string;
+  "codigo": string;
+  "nombre": string;
+  "precio": number;
+  "codigoBarra": string;
   "foto": string;
-
-  //idReceta: Receta;
-  "listRecetas": Array<Receta>;
-
+  "descripcion": string;
   "categoria": string;
   "proveedor": string;
-  "unidadMedida": string;
+  "tipoNegocio": number;
+  "impoconsumo": number;
+  "ivaTasa": number;
+  "impoconsumoTasa": number;
 
-  constructor() {
-
-    this.listRecetas = new Array<Receta>();
-  }
+  
 
 }

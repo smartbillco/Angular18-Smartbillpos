@@ -15,7 +15,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import * as XLSX from 'xlsx';
 import { ConfirmationService } from "../../../../services/utilidad/confirmation.service";
-import { SearchService } from "../../../../services/search.service.ts.service";
+import { SearchService } from "../../../../services/search.service";
 
 @Component({
   selector: 'app-categoria-list',
@@ -44,6 +44,9 @@ export class CategoriaListComponent implements OnInit, AfterViewInit, OnDestroy 
   @ViewChild(MatSort) sort!: MatSort; 
   private subscriptions: Subscription[] = []; 
 
+
+
+  
   constructor(
     public dialog: MatDialog,
     private _categoriaService: CategoriasService,

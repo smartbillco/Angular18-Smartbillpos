@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { Component, AfterViewInit, OnDestroy, OnInit, ViewChild, EventEmitter, Output } from "@angular/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Usuario } from "../../../../models/usuario";
 import { Proveedor } from "../../../../models/proveedor";
@@ -15,7 +15,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import * as XLSX from 'xlsx';
 import { ConfirmationService } from "../../../../services/utilidad/confirmation.service";
-import { SearchService } from "../../../../services/search.service.ts.service";
+import { SearchService } from "../../../../services/search.service";
 
 @Component({
   selector: 'app-proveedor-list',
@@ -43,6 +43,13 @@ export class ProveedorListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator; 
   @ViewChild(MatSort) sort!: MatSort; 
   private subscriptions: Subscription[] = []; 
+
+
+  @Output() addOrEditProveedor       = new EventEmitter<void>(); // Emite al abrir el modal para añadir o editar un proveedor
+  @Output() exportProveedoresToExcel = new EventEmitter<void>(); // Emite para exportar datos de proveedores a un archivo Excel
+  @Output() exportProveedoresToPdf   = new EventEmitter<void>(); // Emite para exportar datos de proveedores a un archivo PDF
+  @Output() uploadProveedorFile      = new EventEmitter<void>(); // Emite para iniciar la subida de un archivo de proveedores
+
 
   constructor(
     public dialog: MatDialog,

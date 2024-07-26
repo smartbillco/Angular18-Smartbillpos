@@ -1,0 +1,149 @@
+<form #formNuevaCompra='ngForm' novalidate (ngSubmit)='nuevaCompra(formNuevaCompra)'>
+
+  <div class="modal-body">
+    <div class="row">
+      <div class="form-group col-12 col-md-4" *ngIf="isFacturaProveedor">
+        <label>Número de factura</label>
+        <input [(ngModel)]='facturaProveedor.numero'
+               minlength="2"
+               type="text"
+               class="form-control form-control-lg"
+               required
+               name="facNumero">
+      </div>
+
+      <div class="form-group col-12 col-md-4" *ngIf="isFacturaProveedor">
+        <label>Fecha de factura</label>
+        <input [(ngModel)]='facturaProveedor.fecha'
+               minlength="2"
+               type="date"
+               class="form-control"
+               required
+               name="facFecha">
+      </div>
+
+      <div class="form-group col-12 col-md-4" *ngIf="isFacturaProveedor">
+        <label>Fecha de vencimiento</label>
+        <input [(ngModel)]='facturaProveedor.fechaVencimiento'
+               minlength="2"
+               type="date"
+               class="form-control form-control-lg"
+               required
+               name="facFechaVencimiento">
+      </div>
+
+
+    </div>
+
+    <div class="row">
+
+      <div class="form-group col-12 col-md-4" *ngIf="isFacturaProveedor">
+        <label>Proveedor</label>
+        <select [(ngModel)]='facturaProveedor.idProveedor'
+                class="browser-default custom-select"
+                name="factProv">
+          <option value=undefined selected>Seleccionar un proveedor</option>
+          <option [ngValue]='prov.idProveedor' *ngFor='let prov of listaProveedores'>{{prov.nombre}}</option>
+        </select>
+      </div>
+
+      <div class="form-group col-12 col-md-4">
+        <label>Total</label>
+        <input ngNativeValidate [(ngModel)]='facturaProveedor.valor'
+               minlength="2"
+               type="number"
+               class="form-control form-control-lg"
+               required
+               name="facTotalValor"
+               #facTotalValor="ngModel">
+        <div class="litle-text" *ngIf="facTotalValor.touched">
+          <span *ngIf="facTotalValor?.errors?.required">Solo se permiten numeros</span>
+          <span *ngIf="facTotalValor?.errors?.minlength">Se requieren minimo 2 digitos</span>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+    <br>
+
+    <form #formNuevaCompra='ngForm' ngNativeValidate (ngSubmit)='addProductoFactura()'>
+
+
+      <div class="row">
+
+        <div class="form-group col-12 col-md-6">
+          <label>Producto</label>
+          <select [(ngModel)]='compra.idProducto'
+                  class="browser-default custom-select"
+                  name="factProdNom"
+                  (change)='setProductoCompra()'>
+            <option value=undefined selected>Seleccionar un producto</option>
+            <option [ngValue]='prod.idProducto' *ngFor='let prod of listaProductos'>
+              {{prod.nombre}}
+            </option>
+          </select>
+        </div>
+
+
+        <div class="form-group col-12 col-md-4">
+          <label>Cantidad</label>
+          <input [(ngModel)]='compra.cantidad'
+                 minlength="2"
+                 type="number"
+                 class="form-control"
+                 required
+                 name="compraCantidad"
+                 #compraCantidad="ngModel">
+
+          <div class="litle-text" *ngIf="compraCantidad.touched">
+            <span *ngIf="facTotalValor?.errors?.required">La cantidad es necesaria - Solo se permiten numeros</span>
+            <span *ngIf="facTotalValor?.errors?.minlength">Se requieren minimo 2 digitos</span>
+          </div>
+        </div>
+
+        <div class="form-group col-12 col-md-2">
+          <button type="submit" class="btn btn-success" title="Agregar Producto" style="margin-top: 21px;">
+            <i class="fa fa-plus"></i> Agregar
+          </button>
+        </div>
+
+
+      </div>
+
+
+    </form>
+    <div class="table-responsive">
+      <table id="dt-compras-factura" class="table table-bordered" style="width: 100%">
+        <thead class="thead-default">
+        <tr>
+          <th class="td-option">Nombre</th>
+          <th class="td-option">Cantidad</th>
+          <td class="td-option">Eliminar</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor='let compra of facturaProveedor.listaCompras'>
+          <td>{{compra.producto}}</td>
+          <td>{{compra.cantidad}}</td>
+
+          <td class="tableoption anchoColumnaOpciones">
+            <button (click)='eliminarProductoCompra(compra)'
+                    class="btn btn-danger"
+                    title="Eliminar">
+              <i class="fa fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <br><br>
+    </div>
+
+
+  </div>
+
+  <div class="modal-footer ">
+    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
+    <button type="submit" class="btn btn-success">Aceptar</button>
+  </div>
+</form>

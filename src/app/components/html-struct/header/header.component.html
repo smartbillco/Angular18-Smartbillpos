@@ -1,68 +1,55 @@
 <header class="header">
     <div class="navigation-trigger hidden-xl-up" data-ma-action="aside-open" data-ma-target=".sidebar">
-        <div class="navigation-trigger__inner">
-            <i class="navigation-trigger__line"></i>
-            <i class="navigation-trigger__line"></i>
-            <i class="navigation-trigger__line"></i>
-        </div>
+      <div class="navigation-trigger__inner">
+        <i class="navigation-trigger__line"></i>
+        <i class="navigation-trigger__line"></i>
+        <i class="navigation-trigger__line"></i>
+      </div>
     </div>
-
-    <!--
-    <div class="header__logo">
-        <h1>
-            <a routerLink="/home" class="bold-italic-elegant">
-                <img src="assets/logo.png" style="width:35px" alt="SMARTBILL"> SMARTBILL
-            </a>
-        </h1>
-    </div>
-    -->
-
+  
     <form class="search">
-        <div class="search__inner">
-            <input name="search" class="search__text" type="text" (input)="onSearch($event)" [placeholder]="placeholder">
-            <i class="zmdi zmdi-search search__helper" data-ma-action="search-close"></i>
-        </div>
+      <div class="search__inner">
+        <input name="search" class="search__text" type="text" (input)="onSearch($event)" [placeholder]="placeholder">
+        <i class="zmdi zmdi-search search__helper" data-ma-action="search-close"></i>
+      </div>
     </form>
-
+  
     <ul class="top-nav">
-        <li class="hidden-xl-up">
-            <a href="" data-ma-action="search-open">
-                <i class="zmdi zmdi-search"></i>
-            </a>
-        </li>
+      <li class="hidden-xl-up">
+        <a href="" data-ma-action="search-open">
+          <i class="zmdi zmdi-search"></i>
+        </a>
+      </li>
+    
+      
 
-        <li class="dropdown hidden-xs-down">
-            <a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>
-        
-            <div class="dropdown-menu dropdown-menu-right">
-
+      
+      <li class="dropdown hidden-xs-down user-info-item">
+        <a href="" data-toggle="dropdown">
+          <!-- Contenedor para el ícono de usuario y la información -->
+          <div class="user-info-container">
+            <div class="user-info">
+              <div class="user-rol">{{ userRol }}</div>
+              <div class="user-name">{{ userName }}</div>
             </div>
-        </li>
+            <i class="fas fa-user user-icon"></i> <!-- Ícono de usuario -->
+          </div>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right">
+          <div *ngIf="userName">
+            <div class="dropdown-item">Nuevo usuario</div>
+            <div class="dropdown-item" (click)="logout()">Cerrar sesión</div>
+          </div>
+        </div>
+      </li>
+      
+      
 
-        <li class="dropdown top-nav__notifications">
-            <a href="" data-toggle="dropdown" class="top-nav__notify">
-                <i class="zmdi zmdi-notifications"></i>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right dropdown-menu--block">
-                <div class="listview listview--hover">
-                    <div class="listview__header">
-                        Notifications
-                        <div class="actions">
-                            <a href="" class="actions__item zmdi zmdi-check-all" data-ma-action="notifications-clear"></a>
-                        </div>
-                    </div>
-                    <div class="listview__scroll scrollbar-inner">
-                        <a href="" class="listview__item">
-                            <img src="./assets/demo/img/profile-pics/1.jpg" class="listview__img" alt="David Belle">
-                            <div class="listview__content">
-                                <div class="listview__heading">David Belle</div>
-                                <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="p-1"></div>
-                </div>
-            </div>
-        </li>
+      
+
+
     </ul>
-</header>
+
+    
+  </header>
+

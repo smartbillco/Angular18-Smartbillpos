@@ -48,7 +48,9 @@
               "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
               "node_modules/ngx-toastr/toastr.css",
               "src/styles.scss",
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/css/app.min.css",
+              "src/assets/demo/css/demo.css"
             ],
             "scripts": [
               "src/assets/vendors/jquery/jquery.min.js",
@@ -72,8 +74,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "3MB",
-                  "maximumError": "3MB"
+                  "maximumWarning": "7MB",
+                  "maximumError": "7MB"
                 },
                 {
                   "type": "anyComponentStyle",

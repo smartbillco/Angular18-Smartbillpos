@@ -12,7 +12,6 @@ import { ScriptLoaderService } from '../../../services/utilidad/script-loader.se
 export class HomeComponent implements OnInit {
 
   listaProductos!: Producto[];
-  public idCaja: number | null = null;
 
   constructor(
 
@@ -21,7 +20,6 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.idCaja = Number(localStorage.getItem('idCaja'));
 
     //this.loadAssets();
     

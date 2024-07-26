@@ -1,0 +1,9 @@
+<div class="mini-chart-container" [style.height]="height" [style.width]="width">
+    <div *ngIf="!hasData" class="no-data-icon">
+      <i class="fas fa-chart-bar fa-3x"></i> 
+      <!--
+      <p>No hay datos para mostrar</p>
+      -->
+    </div>
+    <canvas id="miniChartInvoice"></canvas>
+  </div>
